@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+
+group = 'com.itc'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.10.2'
+    itextVersion = '8.0.3'
+    poiVersion  = '5.2.5'
+}
+
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    modularity.inferModulePath = false
+}
+
+tasks.withType(JavaExec).configureEach {
+    modularity.inferModulePath = false
+}
+
+application {
+    mainClass = 'com.itc.healthtrack.Main'
+}
+
+javafx {
+    version = '21'
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
+    implementation "com.itextpdf:itext-core:${itextVersion}"
+    implementation "org.apache.poi:poi:${poiVersion}"
+    implementation "org.apache.poi:poi-ooxml:${poiVersion}"
+    implementation 'org.slf4j:slf4j-simple:2.0.12'
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
