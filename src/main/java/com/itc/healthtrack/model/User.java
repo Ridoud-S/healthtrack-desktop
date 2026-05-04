@@ -1,6 +1,6 @@
 package com.itc.healthtrack.model;
 
-public record Usuario(
+public record User(
         String uid,
         String nombre,
         String email,

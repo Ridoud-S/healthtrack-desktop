@@ -1,4 +1,9 @@
 package com.itc.healthtrack.model;
 
-public class MetricaRecord {
-}
+public record MetricaRecord(
+        String id,
+        String tipo,
+        Double valorPrimario,
+        Double valorSecundario,
+        String fechaRegistro
+) {}
