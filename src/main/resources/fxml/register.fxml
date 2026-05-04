@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import com.itc.healthtrack.model.Role?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.Register"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.itc.healthtrack.controller.RegisterController"
+      spacing="14" alignment="CENTER"
+      prefWidth="420" prefHeight="420">
+    <padding><Insets top="40" right="48" bottom="40" left="48"/></padding>
 
-</AnchorPane>
+    <Label text="Crear cuenta" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <TextField fx:id="txtNombre" promptText="Nombre completo"/>
+    <TextField fx:id="txtEmail" promptText="Correo electrónico"/>
+    <PasswordField fx:id="txtPassword" promptText="Contraseña"/>
+    <PasswordField fx:id="txtConfirmPassword" promptText="Confirmar contraseña"/>
+    <ComboBox fx:id="cmbRol" maxWidth="Infinity"/>
+    <Button fx:id="btnRegister" text="Registrarse"
+            maxWidth="Infinity" onAction="#onRegisterPressed"/>
+</VBox>

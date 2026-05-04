@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.itc.healthtrack.controller.PatientDashboardController"
+      spacing="16"
+      prefWidth="900" prefHeight="650"
+      style="-fx-padding: 32;">
 
-</AnchorPane>
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <Label fx:id="lblWelcome" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnLogout" text="Cerrar sesión" onAction="#onLogoutPressed"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Formulario de presión arterial -->
+    <Label text="Registrar Presión Arterial"
+           style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <TextField fx:id="txtSistolica"
+                   promptText="Sistólica (ej. 120)"
+                   prefWidth="200"/>
+        <TextField fx:id="txtDiastolica"
+                   promptText="Diastólica (ej. 80)"
+                   prefWidth="200"/>
+        <Button fx:id="btnGuardarPresion"
+                text="Guardar métrica"
+                onAction="#onGuardarPresionPressed"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Tabla de historial -->
+    <Label text="Historial de Métricas"
+           style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tablaMetricas" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colFecha"     text="Fecha y hora"  prefWidth="220"/>
+            <TableColumn fx:id="colTipo"      text="Tipo"          prefWidth="180"/>
+            <TableColumn fx:id="colSistolica" text="Sistólica"     prefWidth="120"/>
+            <TableColumn fx:id="colDiastolica" text="Diastólica"   prefWidth="120"/>
+        </columns>
+    </TableView>
+
+</VBox>

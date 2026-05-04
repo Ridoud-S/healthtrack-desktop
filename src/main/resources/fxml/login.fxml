@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.itc.healthtrack.controller.LoginController"
+      spacing="14" alignment="CENTER"
+      prefWidth="420" prefHeight="320">
+    <padding><Insets top="40" right="48" bottom="40" left="48"/></padding>
 
-</AnchorPane>
+    <Label text="HealthTrack" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <TextField fx:id="txtEmail" promptText="Correo electrónico"/>
+    <PasswordField fx:id="txtPassword" promptText="Contraseña"/>
+    <Button fx:id="btnLogin" text="Iniciar sesión"
+            maxWidth="Infinity" onAction="#onLoginPressed"/>
+    <Hyperlink fx:id="lnkRegister" text="¿No tienes cuenta? Regístrate"
+               onAction="#onRegisterPressed"/>
+</VBox>

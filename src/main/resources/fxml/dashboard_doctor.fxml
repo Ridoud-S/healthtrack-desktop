@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.itc.healthtrack.controller.DoctorDashboardController"
+      spacing="16"
+      prefWidth="1000" prefHeight="680"
+      style="-fx-padding: 32;">
 
-</AnchorPane>
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <Label fx:id="lblWelcome"
+               style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnLogout" text="Cerrar sesión"
+                onAction="#onLogoutPressed"/>
+    </HBox>
+
+    <Separator/>
+
+    <!-- Contenido principal: dos columnas -->
+    <HBox spacing="24" VBox.vgrow="ALWAYS">
+
+        <!-- Columna izquierda: tabla de pacientes -->
+        <VBox spacing="8" prefWidth="300">
+            <Label text="Mis Pacientes"
+                   style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tablaPacientes" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="160"/>
+                    <TableColumn fx:id="colEmail"  text="Email"  prefWidth="200"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+        <!-- Columna derecha: historial de métricas del paciente seleccionado -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS">
+            <Label fx:id="lblPacienteSeleccionado"
+                   text="Selecciona un paciente"
+                   style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+            <TableView fx:id="tablaMetricas" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colFecha"      text="Fecha y hora"  prefWidth="220"/>
+                    <TableColumn fx:id="colTipo"       text="Tipo"          prefWidth="160"/>
+                    <TableColumn fx:id="colSistolica"  text="Sistólica"     prefWidth="100"/>
+                    <TableColumn fx:id="colDiastolica" text="Diastólica"    prefWidth="100"/>
+                </columns>
+            </TableView>
+        </VBox>
+
+    </HBox>
+
+</VBox>
