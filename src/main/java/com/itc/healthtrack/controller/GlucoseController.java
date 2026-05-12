@@ -12,41 +12,43 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
- * Controlador del sub-módulo de Presión Arterial.
+ * Controlador del sub-módulo de Glucosa.
  *
- * Renombrado desde PatientDashboardController.
- * Ya NO maneja navegación ni cierre de sesión — esa responsabilidad
- * pertenece al Shell (PatientLayoutController).
+ * Similar a BloodPressureController pero con un solo campo de entrada
+ * (nivel de glucosa en mg/dL). Filtra la tabla para mostrar solo
+ * registros de tipo GLUCOSA.
+ *
+ * Implementa ModuleLimpiable para liberar el listener de Firestore
+ * cuando el Shell inyecta otro módulo.
  */
-public class BloodPressureController implements Initializable, ModuleLimpiable {
+public class GlucoseController implements Initializable, ModuleLimpiable {
 
     // ── Header ───────────────────────────────────────────
     @FXML private Label lblWelcome;
 
     // ── Formulario ────────────────────────────────────────
-    @FXML private TextField txtSistolica;
-    @FXML private TextField txtDiastolica;
-    @FXML private Button    btnGuardarPresion;
+    @FXML private TextField txtGlucosa;
+    @FXML private Button    btnGuardarGlucosa;
     @FXML private Label     lblFeedback;
 
     // ── Tabla ────────────────────────────────────────────
-    @FXML private TableView<MetricaRecord>        tablaMetricas;
-    @FXML private TableColumn<MetricaRecord, String>   colFecha;
-    @FXML private TableColumn<MetricaRecord, String>   colTipo;
-    @FXML private TableColumn<MetricaRecord, Double>   colSistolica;
-    @FXML private TableColumn<MetricaRecord, Double>   colDiastolica;
-    @FXML private TableColumn<MetricaRecord, Boolean>  colAlerta;
-    @FXML private TableColumn<MetricaRecord, String>   colRecomendacion;
+    @FXML private TableView<MetricaRecord>              tablaMetricas;
+    @FXML private TableColumn<MetricaRecord, String>    colFecha;
+    @FXML private TableColumn<MetricaRecord, Double>    colNivel;
+    @FXML private TableColumn<MetricaRecord, Boolean>   colAlerta;
+    @FXML private TableColumn<MetricaRecord, String>    colRecomendacion;
 
     // ── Dependencias ─────────────────────────────────────
-    private final MetricaService metricaService = new MetricaService(new MetricaRepositoryImpl());
-    private final ObservableList<MetricaRecord> metricasList = FXCollections.observableArrayList();
+    private final MetricaService metricaService =
+            new MetricaService(new MetricaRepositoryImpl());
+    private final ObservableList<MetricaRecord> metricasList =
+            FXCollections.observableArrayList();
     private ListenerRegistration listenerRegistration;
 
     // ─────────────────────────────────────────────────────
@@ -56,9 +58,9 @@ public class BloodPressureController implements Initializable, ModuleLimpiable {
         configurarColumnas();
         iniciarListenerTiempoReal();
 
-        // Obtener nombre del paciente desde sesión
-        String nombrePaciente = UserSession.getInstance().getLoggedUser().nombre();
-        lblWelcome.setText("Paciente: " + nombrePaciente);
+        // Nombre del paciente
+        String nombre = UserSession.getInstance().getLoggedUser().nombre();
+        lblWelcome.setText("Paciente: " + nombre);
     }
 
     // ── Configuración de columnas ─────────────────────────
@@ -66,19 +68,31 @@ public class BloodPressureController implements Initializable, ModuleLimpiable {
     private void configurarColumnas() {
         colFecha.setCellValueFactory(cell ->
                 new javafx.beans.property.SimpleStringProperty(cell.getValue().fechaRegistro()));
-        colTipo.setCellValueFactory(cell ->
-                new javafx.beans.property.SimpleStringProperty(cell.getValue().tipo()));
-        colSistolica.setCellValueFactory(cell ->
+        colNivel.setCellValueFactory(cell ->
                 new javafx.beans.property.SimpleDoubleProperty(cell.getValue().valorPrimario()).asObject());
-        colDiastolica.setCellValueFactory(cell ->
-                new javafx.beans.property.SimpleDoubleProperty(cell.getValue().valorSecundario()).asObject());
         colAlerta.setCellValueFactory(cell ->
                 new javafx.beans.property.SimpleBooleanProperty(cell.getValue().alerta()).asObject());
         colRecomendacion.setCellValueFactory(cell ->
                 new javafx.beans.property.SimpleStringProperty(cell.getValue().recomendacion()));
 
+        // CellFactory visual para la columna Alerta (🟢 / 🔴)
+        colAlerta.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Boolean alerta, boolean empty) {
+                super.updateItem(alerta, empty);
+                if (empty || alerta == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    Label indicator = new Label(alerta ? "⚠ Alerta" : "✅ Normal");
+                    indicator.getStyleClass().add(alerta ? "alert-badge-danger" : "alert-badge-ok");
+                    setGraphic(indicator);
+                }
+            }
+        });
+
         tablaMetricas.setItems(metricasList);
-        tablaMetricas.setPlaceholder(new Label("No hay métricas registradas."));
+        tablaMetricas.setPlaceholder(new Label("No hay registros de glucosa."));
     }
 
     // ── Listener en tiempo real ────────────────────────────
@@ -88,7 +102,13 @@ public class BloodPressureController implements Initializable, ModuleLimpiable {
 
         listenerRegistration = metricaService.escucharMetricasPaciente(
                 uid,
-                metricas -> Platform.runLater(() -> metricasList.setAll(metricas)),
+                metricas -> Platform.runLater(() -> {
+                    // Filtrar solo métricas de tipo GLUCOSA
+                    var filtradas = metricas.stream()
+                            .filter(m -> "GLUCOSA".equals(m.tipo()))
+                            .collect(Collectors.toList());
+                    metricasList.setAll(filtradas);
+                }),
                 error -> Platform.runLater(() ->
                         mostrarFeedback("Error al escuchar cambios: " + error.getMessage(), false))
         );
@@ -97,47 +117,44 @@ public class BloodPressureController implements Initializable, ModuleLimpiable {
     // ── Handler del formulario ────────────────────────────
 
     @FXML
-    private void onGuardarPresionPressed() {
-        String sistolicaStr  = txtSistolica.getText().trim();
-        String diastolicaStr = txtDiastolica.getText().trim();
+    private void onGuardarGlucosaPressed() {
+        String glucosaStr = txtGlucosa.getText().trim();
 
-        if (sistolicaStr.isEmpty() || diastolicaStr.isEmpty()) {
-            mostrarFeedback("Por favor, completa ambos campos.", false);
+        if (glucosaStr.isEmpty()) {
+            mostrarFeedback("Por favor, ingresa el nivel de glucosa.", false);
             return;
         }
 
         try {
-            double sistolica  = Double.parseDouble(sistolicaStr);
-            double diastolica = Double.parseDouble(diastolicaStr);
+            double nivel = Double.parseDouble(glucosaStr);
 
             String uid = UserSession.getInstance().getLoggedUser().uid();
-            btnGuardarPresion.setDisable(true);
+            btnGuardarGlucosa.setDisable(true);
 
-            // Ejecutar en background thread
             Task<Void> task = new Task<>() {
                 @Override
                 protected Void call() throws Exception {
-                    metricaService.validarYGuardar(uid, "PRESION_ARTERIAL", sistolica, diastolica);
+                    // valorSecundario = null (glucosa solo usa un valor)
+                    metricaService.validarYGuardar(uid, "GLUCOSA", nivel, null);
                     return null;
                 }
             };
 
             task.setOnSucceeded(event -> {
-                txtSistolica.clear();
-                txtDiastolica.clear();
-                mostrarFeedback("Métrica guardada correctamente.", true);
-                btnGuardarPresion.setDisable(false);
+                txtGlucosa.clear();
+                mostrarFeedback("Glucosa registrada correctamente.", true);
+                btnGuardarGlucosa.setDisable(false);
             });
 
             task.setOnFailed(event -> {
                 mostrarFeedback("Error al guardar: " + task.getException().getMessage(), false);
-                btnGuardarPresion.setDisable(false);
+                btnGuardarGlucosa.setDisable(false);
             });
 
             new Thread(task).start();
 
         } catch (NumberFormatException e) {
-            mostrarFeedback("Los valores deben ser números válidos (ej: 120.5, 80.0).", false);
+            mostrarFeedback("El valor debe ser un número válido (ej: 95, 110.5).", false);
         }
     }
 
@@ -151,12 +168,13 @@ public class BloodPressureController implements Initializable, ModuleLimpiable {
         lblFeedback.setManaged(true);
     }
 
-    // ── Cleanup (llamado por Shell al cerrar) ───────────
+    // ── ModuleLimpiable ───────────────────────────────────
 
+    @Override
     public void detenerListeners() {
         if (listenerRegistration != null) {
             listenerRegistration.remove();
+            listenerRegistration = null;
         }
     }
 }
-

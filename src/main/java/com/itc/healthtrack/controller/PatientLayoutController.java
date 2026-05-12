@@ -1,5 +1,6 @@
 package com.itc.healthtrack.controller;
 
+import com.itc.healthtrack.session.UserSession;
 import com.itc.healthtrack.util.ViewManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
  *  - Manejar la navegación del Sidebar sin recargar la ventana.
  *  - Inyectar sub-módulos FXML en el contentArea.
  *  - Resaltar el botón activo del sidebar.
- *  - (Opcional) Pasar datos del paciente a cada sub-módulo via loadViewIntoPaneWithController().
+ *  - Detener listeners del módulo anterior antes de cargar uno nuevo (evita memory leaks).
  */
 public class PatientLayoutController implements Initializable {
 
@@ -35,22 +36,27 @@ public class PatientLayoutController implements Initializable {
     // ── Contenedor central dinámico ───────────────────────
     @FXML private AnchorPane contentArea;
 
-    // Rutas FXML de cada sub-módulo (ajusta según tu estructura de recursos)
-    private static final String VIEW_SUMMARY        = "views/patient_summary.fxml";
-    private static final String VIEW_BLOOD_PRESSURE = "views/patient_blood_pressure.fxml";
-    private static final String VIEW_GLUCOSE        = "views/patient_glucose.fxml";
-    private static final String VIEW_LOGIN          = "views/login.fxml";
+    // Rutas FXML de cada sub-módulo
+    private static final String VIEW_SUMMARY        = "fxml/patient_summary.fxml";
+    private static final String VIEW_BLOOD_PRESSURE = "fxml/patient_blood_pressure.fxml";
+    private static final String VIEW_GLUCOSE        = "fxml/patient_glucose.fxml";
+    private static final String VIEW_LOGIN          = "fxml/login.fxml";
+
+    // ── Referencia al controlador del módulo activo ──────
+    // Se usa para invocar detenerListeners() antes de inyectar uno nuevo.
+    private Object currentModuleController;
 
     // ─────────────────────────────────────────────────────
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Rellenar info del paciente en el sidebar
+        String nombre = UserSession.getInstance().getLoggedUser().nombre();
+        String uid    = UserSession.getInstance().getLoggedUser().uid();
+        labelPatientName.setText(nombre);
+        labelPatientId.setText("ID: " + uid.substring(0, Math.min(uid.length(), 8)) + "…");
+
         // Carga el Resumen por defecto al abrir el Shell
         loadModule(VIEW_SUMMARY, btnSummary);
-
-        // TODO: Obtener datos del paciente desde la sesión activa y rellenar el sidebar
-        // Patient patient = SessionManager.getCurrentPatient();
-        // labelPatientName.setText(patient.getFullName());
-        // labelPatientId.setText("ID: " + patient.getId());
     }
 
     // ── Handlers de los botones del Sidebar ──────────────
@@ -72,7 +78,9 @@ public class PatientLayoutController implements Initializable {
 
     @FXML
     private void handleLogout() {
-        // switchScene reemplaza la ventana completa → correcto para salir del Shell
+        // Detener listeners del módulo activo antes de salir del Shell
+        limpiarModuloActual();
+        UserSession.getInstance().cleanSession();
         ViewManager.switchScene(VIEW_LOGIN, "HealthTrack — Iniciar Sesión", btnLogout);
     }
 
@@ -81,10 +89,32 @@ public class PatientLayoutController implements Initializable {
     /**
      * Carga el FXML del módulo en el contentArea y actualiza
      * el estado visual (active/inactive) de los botones del sidebar.
+     *
+     * IMPORTANTE: Antes de inyectar la nueva vista, se invoca
+     * detenerListeners() en el módulo anterior si implementa
+     * ModuleLimpiable, evitando fugas de memoria por listeners
+     * de Firestore acumulados.
      */
     private void loadModule(String fxmlPath, Button activeBtn) {
-        ViewManager.loadViewIntoPane(fxmlPath, contentArea);
+        // 1. Limpiar el módulo anterior
+        limpiarModuloActual();
+
+        // 2. Cargar la nueva vista y obtener su controlador
+        currentModuleController = ViewManager.loadViewIntoPaneWithController(fxmlPath, contentArea);
+
+        // 3. Actualizar el estado visual del sidebar
         updateActiveButton(activeBtn);
+    }
+
+    /**
+     * Si el controlador del módulo activo implementa ModuleLimpiable,
+     * invoca detenerListeners() para liberar recursos.
+     */
+    private void limpiarModuloActual() {
+        if (currentModuleController instanceof ModuleLimpiable moduloAnterior) {
+            moduloAnterior.detenerListeners();
+        }
+        currentModuleController = null;
     }
 
     /**
@@ -101,21 +131,4 @@ public class PatientLayoutController implements Initializable {
             activeBtn.getStyleClass().add("nav-btn-active");
         }
     }
-
-    /*
-     * ──────────────────────────────────────────────────────────────────────────
-     * PATRÓN AVANZADO (descomenta si necesitas pasar datos al sub-módulo):
-     *
-     * Si el sub-módulo necesita recibir el objeto Patient u otros datos,
-     * usa loadViewIntoPaneWithController() en lugar de loadViewIntoPane():
-     *
-     *   @FXML
-     *   private void handleBloodPressure() {
-     *       BloodPressureController ctrl =
-     *           ViewManager.loadViewIntoPaneWithController(VIEW_BLOOD_PRESSURE, contentArea);
-     *       ctrl.setPatient(SessionManager.getCurrentPatient());
-     *       updateActiveButton(btnBloodPressure);
-     *   }
-     * ──────────────────────────────────────────────────────────────────────────
-     */
 }

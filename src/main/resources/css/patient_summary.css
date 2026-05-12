@@ -1,0 +1,194 @@
+/* ════════════════════════════════════════════════════════════════
+   patient_summary.css — HealthTrack: Dashboard de Resumen
+   ════════════════════════════════════════════════════════════════
+   Estilos para las Metric Cards, Panel de Alertas y header.
+   Paleta coordinada con patient_layout.css (sidebar).
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Raíz del módulo ──────────────────────────────────────────── */
+.summary-root {
+    -fx-background-color: #F1F5F9;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.summary-header {
+    -fx-padding: 8 0 0 0;
+}
+
+.summary-icon {
+    -fx-font-size: 28;
+}
+
+.summary-title {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+.summary-subtitle {
+    -fx-font-size: 12;
+    -fx-text-fill: #64748B;
+}
+
+.summary-divider {
+    -fx-padding: 4 0;
+    -fx-opacity: 0.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  METRIC CARDS                                                  */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.cards-row {
+    -fx-alignment: CENTER;
+}
+
+/* ── Base de todas las cards ─────────────────────────────────── */
+.metric-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 8, 0, 0, 2);
+    -fx-min-height: 155;
+    -fx-cursor: hand;
+}
+
+.metric-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 14, 0, 0, 4);
+}
+
+/* ── Acento de color por tipo de métrica (borde superior) ────── */
+.metric-card-pa {
+    -fx-border-color: #3B82F6 #E2E8F0 #E2E8F0 #E2E8F0;
+    -fx-border-width: 3 1 1 1;
+}
+
+.metric-card-glucosa {
+    -fx-border-color: #F97316 #E2E8F0 #E2E8F0 #E2E8F0;
+    -fx-border-width: 3 1 1 1;
+}
+
+.metric-card-peso {
+    -fx-border-color: #10B981 #E2E8F0 #E2E8F0 #E2E8F0;
+    -fx-border-width: 3 1 1 1;
+}
+
+.metric-card-fc {
+    -fx-border-color: #8B5CF6 #E2E8F0 #E2E8F0 #E2E8F0;
+    -fx-border-width: 3 1 1 1;
+}
+
+/* ── Estado condicional de la card ───────────────────────────── */
+.metric-card-normal {
+    -fx-background-color: #FFFFFF;
+}
+
+.metric-card-alert {
+    -fx-background-color: #FEF2F2;
+    -fx-border-color: #EF4444;
+    -fx-border-width: 2;
+}
+
+/* ── Contenido de las cards ──────────────────────────────────── */
+.card-icon {
+    -fx-font-size: 26;
+}
+
+.card-label {
+    -fx-font-size: 11;
+    -fx-text-fill: #64748B;
+    -fx-font-weight: bold;
+}
+
+.card-value {
+    -fx-font-size: 26;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+.card-status {
+    -fx-font-size: 11;
+    -fx-text-fill: #94A3B8;
+    -fx-font-weight: bold;
+}
+
+/* Estados del label de status */
+.status-normal {
+    -fx-text-fill: #10B981;
+}
+
+.status-alert {
+    -fx-text-fill: #EF4444;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  PANEL DE ALERTAS                                              */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.section-title {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+.alertas-count {
+    -fx-font-size: 13;
+    -fx-text-fill: #94A3B8;
+    -fx-font-weight: bold;
+}
+
+.alertas-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.alertas-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.alertas-list {
+    -fx-background-color: transparent;
+}
+
+/* ── Item individual de alerta ───────────────────────────────── */
+.alert-item {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #FECACA;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.1), 6, 0, 0, 2);
+}
+
+.alert-item:hover {
+    -fx-background-color: #FFF5F5;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.2), 10, 0, 0, 3);
+}
+
+.alert-item-icon {
+    -fx-font-size: 22;
+    -fx-text-fill: #EF4444;
+}
+
+.alert-item-title {
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E293B;
+}
+
+.alert-item-recommendation {
+    -fx-font-size: 11;
+    -fx-text-fill: #64748B;
+}
+
+/* ── Sin alertas ─────────────────────────────────────────────── */
+.no-alertas-label {
+    -fx-font-size: 13;
+    -fx-text-fill: #10B981;
+    -fx-padding: 24 0;
+    -fx-alignment: CENTER;
+    -fx-font-weight: bold;
+}

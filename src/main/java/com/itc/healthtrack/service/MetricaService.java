@@ -26,6 +26,24 @@ public class MetricaService {
                 alerta = true;
                 recomendacion = "Presión elevada. Reducir consumo de sal y monitorear.";
             }
+        } else if ("GLUCOSA".equals(tipo)) {
+            if (v1 > 126) {
+                alerta = true;
+                recomendacion = "Glucosa elevada en ayunas. Consulta con endocrinólogo.";
+            }
+        } else if ("PESO_IMC".equals(tipo)) {
+            if (v1 > 30) {
+                alerta = true;
+                recomendacion = "IMC elevado (obesidad). Considera cambios en dieta y ejercicio.";
+            }
+        } else if ("FRECUENCIA_CARDIACA".equals(tipo)) {
+            if (v1 > 100) {
+                alerta = true;
+                recomendacion = "Taquicardia detectada. Mantente en reposo y monitorea.";
+            } else if (v1 < 60) {
+                alerta = true;
+                recomendacion = "Bradicardia detectada. Consulta con cardiólogo si hay síntomas.";
+            }
         }
 
         MetricaRecord metrica = new MetricaRecord(

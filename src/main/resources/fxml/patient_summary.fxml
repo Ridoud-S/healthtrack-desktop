@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    Sub-módulo: Resumen General del Paciente
+    ────────────────────────────────────────────────────────────────
+    - 4 Metric Cards (PA, Glucosa, Peso/IMC, Frec. Cardíaca)
+    - Panel de Alertas Activas
+    - Se inyecta en el contentArea del Shell (patient_layout.fxml)
+    ────────────────────────────────────────────────────────────────
+-->
+<AnchorPane
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.itc.healthtrack.controller.PatientSummaryController"
+    stylesheets="@../css/patient_summary.css">
+
+    <VBox
+        AnchorPane.topAnchor="0"
+        AnchorPane.bottomAnchor="0"
+        AnchorPane.leftAnchor="0"
+        AnchorPane.rightAnchor="0"
+        spacing="20"
+        styleClass="summary-root">
+
+        <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+        <!-- ── Header ── -->
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="summary-header">
+            <Label text="📊" styleClass="summary-icon" />
+            <VBox spacing="2">
+                <Label fx:id="lblSaludo" text="Cargando..." styleClass="summary-title" />
+                <Label text="Tu resumen de salud" styleClass="summary-subtitle" />
+            </VBox>
+        </HBox>
+
+        <Separator styleClass="summary-divider" />
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  METRIC CARDS — 4 tarjetas en fila responsiva      -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <HBox spacing="16" styleClass="cards-row">
+
+            <!-- Card: Presión Arterial -->
+            <VBox fx:id="cardPa" styleClass="metric-card, metric-card-pa" HBox.hgrow="ALWAYS"
+                  spacing="6" alignment="CENTER">
+                <padding><Insets top="20" right="16" bottom="20" left="16"/></padding>
+                <Label text="❤️"                 styleClass="card-icon" />
+                <Label text="Presión Arterial"   styleClass="card-label" />
+                <Label fx:id="lblPaValue"  text="--/--"    styleClass="card-value" />
+                <Label fx:id="lblPaStatus" text="Sin datos" styleClass="card-status" />
+            </VBox>
+
+            <!-- Card: Glucosa -->
+            <VBox fx:id="cardGlucosa" styleClass="metric-card, metric-card-glucosa" HBox.hgrow="ALWAYS"
+                  spacing="6" alignment="CENTER">
+                <padding><Insets top="20" right="16" bottom="20" left="16"/></padding>
+                <Label text="🩸"        styleClass="card-icon" />
+                <Label text="Glucosa"   styleClass="card-label" />
+                <Label fx:id="lblGlucosaValue"  text="--"        styleClass="card-value" />
+                <Label fx:id="lblGlucosaStatus" text="Sin datos" styleClass="card-status" />
+            </VBox>
+
+            <!-- Card: Peso / IMC -->
+            <VBox fx:id="cardPeso" styleClass="metric-card, metric-card-peso" HBox.hgrow="ALWAYS"
+                  spacing="6" alignment="CENTER">
+                <padding><Insets top="20" right="16" bottom="20" left="16"/></padding>
+                <Label text="⚖️"         styleClass="card-icon" />
+                <Label text="Peso / IMC"  styleClass="card-label" />
+                <Label fx:id="lblPesoValue"  text="--"        styleClass="card-value" />
+                <Label fx:id="lblPesoStatus" text="Sin datos" styleClass="card-status" />
+            </VBox>
+
+            <!-- Card: Frecuencia Cardíaca -->
+            <VBox fx:id="cardFc" styleClass="metric-card, metric-card-fc" HBox.hgrow="ALWAYS"
+                  spacing="6" alignment="CENTER">
+                <padding><Insets top="20" right="16" bottom="20" left="16"/></padding>
+                <Label text="💓"               styleClass="card-icon" />
+                <Label text="Frec. Cardíaca"   styleClass="card-label" />
+                <Label fx:id="lblFcValue"  text="--"        styleClass="card-value" />
+                <Label fx:id="lblFcStatus" text="Sin datos" styleClass="card-status" />
+            </VBox>
+
+        </HBox>
+
+        <Separator styleClass="summary-divider" />
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  ALERTAS ACTIVAS                                    -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <VBox spacing="10" VBox.vgrow="ALWAYS">
+
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label text="🚨 Alertas Activas" styleClass="section-title" />
+                <Label fx:id="lblAlertasCount" text="(0)" styleClass="alertas-count" />
+            </HBox>
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                        styleClass="alertas-scroll">
+                <VBox fx:id="alertasContainer" spacing="10" styleClass="alertas-list">
+                    <padding><Insets top="4" right="4" bottom="4" left="4"/></padding>
+                    <!-- Los alert-items se generan dinámicamente en el Controller -->
+                    <Label text="Cargando alertas..." styleClass="no-alertas-label" />
+                </VBox>
+            </ScrollPane>
+
+        </VBox>
+
+    </VBox>
+</AnchorPane>
