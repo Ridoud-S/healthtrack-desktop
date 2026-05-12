@@ -83,8 +83,10 @@ public class DoctorDashboardController implements Initializable {
                 new SimpleStringProperty(cell.getValue().tipo()));
         colSistolica.setCellValueFactory(cell ->
                 new SimpleDoubleProperty(cell.getValue().valorPrimario()).asObject());
-        colDiastolica.setCellValueFactory(cell ->
-                new SimpleDoubleProperty(cell.getValue().valorSecundario()).asObject());
+        colDiastolica.setCellValueFactory(cell -> {
+            Double val = cell.getValue().valorSecundario();
+            return new SimpleDoubleProperty(val != null ? val : 0.0).asObject();
+        });
         colAlerta.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().alerta() ? "Sí" : "No"));
         colRecomendacion.setCellValueFactory(cell ->

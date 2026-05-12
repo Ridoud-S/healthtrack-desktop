@@ -1,0 +1,174 @@
+/* ════════════════════════════════════════════════════════════════
+   patient_heart_rate.css — HealthTrack: Módulo de Frecuencia Cardíaca
+   ════════════════════════════════════════════════════════════════
+   Paleta púrpura/violeta (#8B5CF6) para diferenciar de PA (azul)
+   y Glucosa (naranja).
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Raíz del módulo ─────────────────────────────────────────── */
+.module-root {
+    -fx-background-color: #F1F5F9;
+    -fx-spacing: 16;
+}
+
+/* ── Header del módulo ─────────────────────────────────────────── */
+.module-header {
+    -fx-padding: 12 0 4 0;
+}
+
+.module-icon {
+    -fx-font-size: 28;
+}
+
+.module-title {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+.module-subtitle {
+    -fx-font-size: 12;
+    -fx-text-fill: #64748B;
+}
+
+/* ── Divisor ──────────────────────────────────────────────────── */
+.module-divider {
+    -fx-padding: 4 0;
+    -fx-opacity: 0.4;
+}
+
+/* ── Formulario ──────────────────────────────────────────────── */
+.form-card {
+    -fx-padding: 20;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #C4B5FD;
+    -fx-border-width: 1 1 1 3;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 6, 0, 0, 2);
+}
+
+.section-title {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E293B;
+}
+
+.field-label {
+    -fx-font-size: 11;
+    -fx-text-fill: #64748B;
+    -fx-font-weight: bold;
+}
+
+.metric-field {
+    -fx-padding: 10;
+    -fx-font-size: 13;
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 6;
+    -fx-border-color: #CBD5E1;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+.metric-field:focused {
+    -fx-border-color: #8B5CF6;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.25), 6, 0, 0, 0);
+}
+
+/* ── Botón primario (acento púrpura) ─────────────────────────── */
+.btn-primary {
+    -fx-padding: 10 24;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #8B5CF6;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.3), 6, 0, 0, 2);
+}
+
+.btn-primary:hover {
+    -fx-background-color: #7C3AED;
+    -fx-effect: dropshadow(gaussian, rgba(139, 92, 246, 0.4), 10, 0, 0, 3);
+}
+
+.btn-primary:pressed {
+    -fx-background-color: #6D28D9;
+    -fx-effect: none;
+}
+
+.btn-primary:disabled {
+    -fx-background-color: #94A3B8;
+    -fx-effect: none;
+    -fx-cursor: default;
+}
+
+/* ── Feedback ──────────────────────────────────────────────── */
+.lbl-feedback {
+    -fx-padding: 10;
+    -fx-font-size: 12;
+    -fx-background-radius: 6;
+}
+
+.lbl-feedback-success {
+    -fx-text-fill: #15803D;
+    -fx-background-color: #DCFCE7;
+    -fx-border-color: #86EFAC;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+.lbl-feedback-error {
+    -fx-text-fill: #B91C1C;
+    -fx-background-color: #FEE2E2;
+    -fx-border-color: #FECACA;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+}
+
+/* ── Tabla ──────────────────────────────────────────────────── */
+.metrics-table {
+    -fx-font-size: 12;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1;
+}
+
+.metrics-table .column-header {
+    -fx-background-color: #F5F3FF;
+    -fx-border-color: #C4B5FD;
+    -fx-border-width: 0 0 1 0;
+}
+
+.metrics-table .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #5B21B6;
+    -fx-font-size: 11;
+}
+
+.table-placeholder {
+    -fx-font-size: 13;
+    -fx-text-fill: #94A3B8;
+}
+
+/* ── Badges de alerta en la tabla ─────────────────────────────── */
+.alert-badge-danger {
+    -fx-font-size: 11;
+    -fx-text-fill: #B91C1C;
+    -fx-background-color: #FEE2E2;
+    -fx-padding: 4 10;
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+}
+
+.alert-badge-ok {
+    -fx-font-size: 11;
+    -fx-text-fill: #15803D;
+    -fx-background-color: #DCFCE7;
+    -fx-padding: 4 10;
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+}

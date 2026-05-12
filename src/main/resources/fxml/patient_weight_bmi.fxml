@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    Sub-módulo: Peso / IMC
+    ────────────────────────────────────────────────────────────────
+    - Dos campos: Peso (kg) y Estatura (m).
+    - Preview en tiempo real del IMC con clasificación OMS.
+    - Tabla filtrada a tipo PESO_IMC (columnas: IMC, Peso, Alerta).
+    - La estatura no se persiste — solo se usa para calcular el IMC.
+    ────────────────────────────────────────────────────────────────
+-->
+<AnchorPane
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.itc.healthtrack.controller.WeightBmiController"
+    stylesheets="@../css/patient_weight_bmi.css">
+
+    <VBox
+        AnchorPane.topAnchor="0"
+        AnchorPane.bottomAnchor="0"
+        AnchorPane.leftAnchor="0"
+        AnchorPane.rightAnchor="0"
+        spacing="16"
+        styleClass="module-root">
+
+        <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+        <!-- ── Header del módulo ── -->
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="module-header">
+            <Label text="⚖️" styleClass="module-icon" />
+            <VBox spacing="2">
+                <Label text="Peso / IMC" styleClass="module-title" />
+                <Label fx:id="lblWelcome" styleClass="module-subtitle" />
+            </VBox>
+        </HBox>
+
+        <Separator styleClass="module-divider" />
+
+        <!-- ── Formulario de registro ── -->
+        <VBox spacing="10" styleClass="form-card">
+            <Label text="Registrar nueva medición" styleClass="section-title" />
+
+            <HBox spacing="16" alignment="CENTER_LEFT">
+                <VBox spacing="4">
+                    <Label text="Peso (kg)" styleClass="field-label" />
+                    <TextField fx:id="txtPeso"
+                               promptText="ej. 70.5"
+                               prefWidth="160"
+                               styleClass="metric-field" />
+                </VBox>
+
+                <VBox spacing="4">
+                    <Label text="Estatura (m)" styleClass="field-label" />
+                    <TextField fx:id="txtEstatura"
+                               promptText="ej. 1.75"
+                               prefWidth="160"
+                               styleClass="metric-field" />
+                </VBox>
+
+                <!-- Preview del IMC en tiempo real -->
+                <VBox spacing="4" alignment="CENTER_LEFT">
+                    <Label text=" " styleClass="field-label" />
+                    <Label fx:id="lblImcPreview"
+                           styleClass="imc-preview"
+                           visible="false" managed="false" />
+                </VBox>
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS" />
+
+                <VBox spacing="4" alignment="CENTER">
+                    <Label text=" " styleClass="field-label" />
+                    <Button fx:id="btnGuardarPeso"
+                            text="＋  Guardar métrica"
+                            styleClass="btn-primary"
+                            onAction="#onGuardarPesoPressed"
+                            defaultButton="true" />
+                </VBox>
+            </HBox>
+
+            <!-- Mensaje de feedback -->
+            <Label fx:id="lblFeedback" styleClass="lbl-feedback" visible="false" managed="false" />
+        </VBox>
+
+        <Separator styleClass="module-divider" />
+
+        <!-- ── Historial ── -->
+        <VBox spacing="8" VBox.vgrow="ALWAYS">
+            <Label text="Historial de peso / IMC" styleClass="section-title" />
+
+            <TableView fx:id="tablaMetricas"
+                       VBox.vgrow="ALWAYS"
+                       styleClass="metrics-table">
+                <placeholder>
+                    <Label text="Aún no hay registros de peso / IMC."
+                           styleClass="table-placeholder" />
+                </placeholder>
+                <columns>
+                    <TableColumn fx:id="colFecha"         text="Fecha y hora"   prefWidth="200" />
+                    <TableColumn fx:id="colImc"           text="IMC"            prefWidth="90"  />
+                    <TableColumn fx:id="colPeso"          text="Peso (kg)"      prefWidth="100" />
+                    <TableColumn fx:id="colAlerta"        text="Alerta"         prefWidth="110" />
+                    <TableColumn fx:id="colRecomendacion" text="Recomendación"  prefWidth="280" />
+                </columns>
+            </TableView>
+        </VBox>
+
+    </VBox>
+</AnchorPane>

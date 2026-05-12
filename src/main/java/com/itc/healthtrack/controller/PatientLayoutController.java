@@ -27,6 +27,8 @@ public class PatientLayoutController implements Initializable {
     @FXML private Button btnSummary;
     @FXML private Button btnBloodPressure;
     @FXML private Button btnGlucose;
+    @FXML private Button btnHeartRate;
+    @FXML private Button btnWeightBmi;
     @FXML private Button btnLogout;
 
     // ── Info del paciente en el sidebar ──────────────────
@@ -40,6 +42,8 @@ public class PatientLayoutController implements Initializable {
     private static final String VIEW_SUMMARY        = "fxml/patient_summary.fxml";
     private static final String VIEW_BLOOD_PRESSURE = "fxml/patient_blood_pressure.fxml";
     private static final String VIEW_GLUCOSE        = "fxml/patient_glucose.fxml";
+    private static final String VIEW_HEART_RATE     = "fxml/patient_heart_rate.fxml";
+    private static final String VIEW_WEIGHT_BMI     = "fxml/patient_weight_bmi.fxml";
     private static final String VIEW_LOGIN          = "fxml/login.fxml";
 
     // ── Referencia al controlador del módulo activo ──────
@@ -74,6 +78,16 @@ public class PatientLayoutController implements Initializable {
     @FXML
     private void handleGlucose() {
         loadModule(VIEW_GLUCOSE, btnGlucose);
+    }
+
+    @FXML
+    private void handleHeartRate() {
+        loadModule(VIEW_HEART_RATE, btnHeartRate);
+    }
+
+    @FXML
+    private void handleWeightBmi() {
+        loadModule(VIEW_WEIGHT_BMI, btnWeightBmi);
     }
 
     @FXML
@@ -122,7 +136,7 @@ public class PatientLayoutController implements Initializable {
      * y la aplica solo al botón que acaba de ser pulsado.
      */
     private void updateActiveButton(Button activeBtn) {
-        List<Button> navButtons = List.of(btnSummary, btnBloodPressure, btnGlucose);
+        List<Button> navButtons = List.of(btnSummary, btnBloodPressure, btnGlucose, btnHeartRate, btnWeightBmi);
 
         for (Button btn : navButtons) {
             btn.getStyleClass().remove("nav-btn-active");

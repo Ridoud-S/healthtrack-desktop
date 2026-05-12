@@ -64,6 +64,18 @@
                     maxWidth="Infinity"
                     onAction="#handleGlucose" />
 
+            <Button fx:id="btnHeartRate"
+                    text="💓  Frec. Cardíaca"
+                    styleClass="nav-btn"
+                    maxWidth="Infinity"
+                    onAction="#handleHeartRate" />
+
+            <Button fx:id="btnWeightBmi"
+                    text="⚖️  Peso / IMC"
+                    styleClass="nav-btn"
+                    maxWidth="Infinity"
+                    onAction="#handleWeightBmi" />
+
             <!-- Spacer — empuja el botón de logout al fondo -->
             <Region VBox.vgrow="ALWAYS" />
 
