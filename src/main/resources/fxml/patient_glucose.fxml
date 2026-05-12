@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    Sub-módulo: Glucosa
+    ────────────────────────────────────────────────────────────────
+    - Un solo campo de entrada (nivel de glucosa en mg/dL).
+    - Tabla filtrada para mostrar solo registros de tipo GLUCOSA.
+    - Sin tamaños absolutos (crece con el contentArea del Shell).
+    - fx:controller apunta a GlucoseController.
+    ────────────────────────────────────────────────────────────────
+-->
+<AnchorPane
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.itc.healthtrack.controller.GlucoseController"
+    stylesheets="@../css/patient_glucose.css">
+
+    <VBox
+        AnchorPane.topAnchor="0"
+        AnchorPane.bottomAnchor="0"
+        AnchorPane.leftAnchor="0"
+        AnchorPane.rightAnchor="0"
+        spacing="16"
+        styleClass="module-root">
+
+        <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+        <!-- ── Header del módulo ── -->
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="module-header">
+            <Label text="🩸" styleClass="module-icon" />
+            <VBox spacing="2">
+                <Label text="Glucosa" styleClass="module-title" />
+                <Label fx:id="lblWelcome" styleClass="module-subtitle" />
+            </VBox>
+        </HBox>
+
+        <Separator styleClass="module-divider" />
+
+        <!-- ── Formulario de registro ── -->
+        <VBox spacing="10" styleClass="form-card">
+            <Label text="Registrar nueva medición" styleClass="section-title" />
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <VBox spacing="4">
+                    <Label text="Nivel de glucosa (mg/dL)" styleClass="field-label" />
+                    <TextField fx:id="txtGlucosa"
+                               promptText="ej. 95"
+                               prefWidth="200"
+                               styleClass="metric-field" />
+                </VBox>
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Button fx:id="btnGuardarGlucosa"
+                        text="＋  Guardar métrica"
+                        styleClass="btn-primary"
+                        onAction="#onGuardarGlucosaPressed"
+                        defaultButton="true" />
+            </HBox>
+
+            <!-- Mensaje de feedback (éxito / error) -->
+            <Label fx:id="lblFeedback" styleClass="lbl-feedback" visible="false" managed="false" />
+        </VBox>
+
+        <Separator styleClass="module-divider" />
+
+        <!-- ── Historial ── -->
+        <VBox spacing="8" VBox.vgrow="ALWAYS">
+            <Label text="Historial de glucosa" styleClass="section-title" />
+
+            <TableView fx:id="tablaMetricas"
+                       VBox.vgrow="ALWAYS"
+                       styleClass="metrics-table">
+                <placeholder>
+                    <Label text="Aún no hay registros de glucosa."
+                           styleClass="table-placeholder" />
+                </placeholder>
+                <columns>
+                    <TableColumn fx:id="colFecha"         text="Fecha y hora"   prefWidth="220" />
+                    <TableColumn fx:id="colNivel"         text="Nivel (mg/dL)"  prefWidth="130" />
+                    <TableColumn fx:id="colAlerta"        text="Alerta"         prefWidth="110" />
+                    <TableColumn fx:id="colRecomendacion" text="Recomendación"  prefWidth="320" />
+                </columns>
+            </TableView>
+        </VBox>
+
+    </VBox>
+</AnchorPane>
