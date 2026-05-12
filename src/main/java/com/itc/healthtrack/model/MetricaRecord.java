@@ -5,5 +5,7 @@ public record MetricaRecord(
         String tipo,
         Double valorPrimario,
         Double valorSecundario,
-        String fechaRegistro
+        String fechaRegistro,
+        boolean alerta,
+        String recomendacion
 ) {}

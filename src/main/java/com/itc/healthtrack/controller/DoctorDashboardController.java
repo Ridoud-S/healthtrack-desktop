@@ -3,6 +3,8 @@ package com.itc.healthtrack.controller;
 import com.google.cloud.firestore.ListenerRegistration;
 import com.itc.healthtrack.model.MetricaRecord;
 import com.itc.healthtrack.model.User;
+import com.itc.healthtrack.repository.MetricaRepository;
+import com.itc.healthtrack.repository.MetricaRepositoryImpl;
 import com.itc.healthtrack.service.MetricaService;
 import com.itc.healthtrack.service.UserService;
 import com.itc.healthtrack.session.UserSession;
@@ -35,12 +37,14 @@ public class DoctorDashboardController implements Initializable {
     @FXML private TableColumn<MetricaRecord, String> colTipo;
     @FXML private TableColumn<MetricaRecord, Double> colSistolica;
     @FXML private TableColumn<MetricaRecord, Double> colDiastolica;
+    @FXML private TableColumn<MetricaRecord, String> colAlerta;
+    @FXML private TableColumn<MetricaRecord, String> colRecomendacion;
 
     private final ObservableList<User> pacientesList = FXCollections.observableArrayList();
     private final ObservableList<MetricaRecord> metricasList = FXCollections.observableArrayList();
 
     private final UserService userService = new UserService();
-    private final MetricaService metricaService = new MetricaService();
+    private final MetricaService metricaService = new MetricaService(new MetricaRepositoryImpl());
 
     private ListenerRegistration listenerRegistration;
 
@@ -81,6 +85,10 @@ public class DoctorDashboardController implements Initializable {
                 new SimpleDoubleProperty(cell.getValue().valorPrimario()).asObject());
         colDiastolica.setCellValueFactory(cell ->
                 new SimpleDoubleProperty(cell.getValue().valorSecundario()).asObject());
+        colAlerta.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().alerta() ? "Sí" : "No"));
+        colRecomendacion.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().recomendacion()));
 
         tablaMetricas.setItems(metricasList);
         tablaMetricas.setPlaceholder(new Label("Selecciona un paciente para ver su historial."));
