@@ -2,10 +2,13 @@ package com.itc.healthtrack.controller;
 
 import com.google.cloud.firestore.ListenerRegistration;
 import com.itc.healthtrack.model.MetricaRecord;
+import com.itc.healthtrack.repository.MetricaRepository;
+import com.itc.healthtrack.repository.MetricaRepositoryImpl;
 import com.itc.healthtrack.service.MetricaService;
 import com.itc.healthtrack.session.UserSession;
 import com.itc.healthtrack.util.ViewManager;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -30,9 +33,11 @@ public class PatientDashboardController implements Initializable {
     @FXML private TableColumn<MetricaRecord, String> colTipo;
     @FXML private TableColumn<MetricaRecord, Double> colSistolica;
     @FXML private TableColumn<MetricaRecord, Double> colDiastolica;
+    @FXML private TableColumn<MetricaRecord, Boolean> colAlerta;
+    @FXML private TableColumn<MetricaRecord, String> colRecomendacion;
 
     private final ObservableList<MetricaRecord> metricasList = FXCollections.observableArrayList();
-    private final MetricaService metricaService = new MetricaService();
+    private final MetricaService metricaService = new MetricaService(new MetricaRepositoryImpl());
     private ListenerRegistration listenerRegistration;
 
     @Override
@@ -53,6 +58,10 @@ public class PatientDashboardController implements Initializable {
                 new SimpleDoubleProperty(cell.getValue().valorPrimario()).asObject());
         colDiastolica.setCellValueFactory(cell ->
                 new SimpleDoubleProperty(cell.getValue().valorSecundario()).asObject());
+        colAlerta.setCellValueFactory(cell ->
+                new SimpleBooleanProperty(cell.getValue().alerta()).asObject());
+        colRecomendacion.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().recomendacion()));
 
         tablaMetricas.setItems(metricasList);
         tablaMetricas.setPlaceholder(new Label("No hay métricas registradas."));
@@ -94,20 +103,12 @@ public class PatientDashboardController implements Initializable {
 
         String uid = UserSession.getInstance().getLoggedUser().uid();
 
-        MetricaRecord metrica = new MetricaRecord(
-                null,
-                "PRESION_ARTERIAL",
-                sistolica,
-                diastolica,
-                MetricaService.nowIso()
-        );
-
         btnGuardarPresion.setDisable(true);
 
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                metricaService.guardarMetrica(uid, metrica);
+                metricaService.validarYGuardar(uid, "PRESION_ARTERIAL", sistolica, diastolica);
                 return null;
             }
         };

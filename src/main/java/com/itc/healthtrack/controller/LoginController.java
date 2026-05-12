@@ -52,7 +52,7 @@ public class LoginController {
 
     private void redirectByRole(Role rol) {
         switch (rol) {
-            case PATIENT -> ViewManager.switchScene("fxml/dashboard_patient.fxml", "HealthTrack - Paciente", btnLogin);
+            case PATIENT -> ViewManager.switchScene("fxml/patient_blood_pressure.fxml", "HealthTrack - Paciente", btnLogin);
             case DOCTOR  -> ViewManager.switchScene("fxml/dashboard_doctor.fxml",  "HealthTrack - Médico",   btnLogin);
             case ADMIN   -> ViewManager.switchScene("fxml/dashboard_admin.fxml",   "HealthTrack - Admin",    btnLogin);
         }

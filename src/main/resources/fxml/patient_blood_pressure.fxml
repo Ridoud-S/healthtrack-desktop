@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    Sub-módulo: Presión Arterial
+    ────────────────────────────────────────────────────────────────
+    CAMBIOS vs. dashboard_patient.fxml original:
+      1. Nodo raíz cambiado de VBox autónomo → AnchorPane inyectable.
+      2. prefWidth / prefHeight eliminados (crece con el contentArea del Shell).
+      3. El VBox interno hereda el tamaño via AnchorPane constraints (0,0,0,0).
+      4. Botón "Cerrar sesión" ELIMINADO — esa responsabilidad es del Shell
+         (PatientLayoutController#handleLogout).
+      5. fx:controller apunta al nuevo nombre BloodPressureController.
+    ────────────────────────────────────────────────────────────────
+-->
+<AnchorPane
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.itc.healthtrack.controller.BloodPressureController"
+    AnchorPane.topAnchor="0"
+    AnchorPane.bottomAnchor="0"
+    AnchorPane.leftAnchor="0"
+    AnchorPane.rightAnchor="0"
+    stylesheets="@../css/patient_blood_pressure.css">
+
+    <VBox
+        AnchorPane.topAnchor="0"
+        AnchorPane.bottomAnchor="0"
+        AnchorPane.leftAnchor="0"
+        AnchorPane.rightAnchor="0"
+        spacing="16"
+        styleClass="module-root">
+
+        <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+        <!-- ── Header del módulo ── -->
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="module-header">
+            <Label text="🩺" styleClass="module-icon" />
+            <VBox spacing="2">
+                <Label text="Presión Arterial" styleClass="module-title" />
+                <Label fx:id="lblWelcome"      styleClass="module-subtitle" />
+            </VBox>
+        </HBox>
+
+        <Separator styleClass="module-divider" />
+
+        <!-- ── Formulario de registro ── -->
+        <VBox spacing="10" styleClass="form-card">
+            <Label text="Registrar nueva medición" styleClass="section-title" />
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <VBox spacing="4">
+                    <Label text="Sistólica (mmHg)" styleClass="field-label" />
+                    <TextField fx:id="txtSistolica"
+                               promptText="ej. 120"
+                               prefWidth="180"
+                               styleClass="metric-field" />
+                </VBox>
+
+                <VBox spacing="4">
+                    <Label text="Diastólica (mmHg)" styleClass="field-label" />
+                    <TextField fx:id="txtDiastolica"
+                               promptText="ej. 80"
+                               prefWidth="180"
+                               styleClass="metric-field" />
+                </VBox>
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Button fx:id="btnGuardarPresion"
+                        text="＋  Guardar métrica"
+                        styleClass="btn-primary"
+                        onAction="#onGuardarPresionPressed"
+                        defaultButton="true" />
+            </HBox>
+
+            <!-- Mensaje de feedback (éxito / error) -->
+            <Label fx:id="lblFeedback" styleClass="lbl-feedback" visible="false" managed="false" />
+        </VBox>
+
+        <Separator styleClass="module-divider" />
+
+        <!-- ── Historial ── -->
+        <VBox spacing="8" VBox.vgrow="ALWAYS">
+            <Label text="Historial de métricas" styleClass="section-title" />
+
+            <TableView fx:id="tablaMetricas"
+                       VBox.vgrow="ALWAYS"
+                       styleClass="metrics-table">
+                <placeholder>
+                    <Label text="Aún no hay métricas registradas."
+                           styleClass="table-placeholder" />
+                </placeholder>
+                <columns>
+                    <TableColumn fx:id="colFecha"         text="Fecha y hora"   prefWidth="190" />
+                    <TableColumn fx:id="colTipo"          text="Tipo"           prefWidth="130" />
+                    <TableColumn fx:id="colSistolica"     text="Sistólica"      prefWidth="100" />
+                    <TableColumn fx:id="colDiastolica"    text="Diastólica"     prefWidth="100" />
+                    <TableColumn fx:id="colAlerta"        text="Alerta"         prefWidth="90"  />
+                    <TableColumn fx:id="colRecomendacion" text="Recomendación"  prefWidth="260" />
+                </columns>
+            </TableView>
+        </VBox>
+
+    </VBox>
+</AnchorPane>

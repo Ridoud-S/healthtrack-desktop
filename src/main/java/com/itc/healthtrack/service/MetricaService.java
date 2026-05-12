@@ -1,36 +1,48 @@
 package com.itc.healthtrack.service;
 
 import com.google.cloud.firestore.ListenerRegistration;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.firebase.cloud.FirestoreClient;
 import com.itc.healthtrack.model.MetricaRecord;
+import com.itc.healthtrack.repository.MetricaRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 public class MetricaService {
 
-    private static final String COLLECTION_USERS    = "users";
-    private static final String COLLECTION_METRICAS = "metricas";
+    private final MetricaRepository metricaRepository;
 
-    public void guardarMetrica(String uidPaciente, MetricaRecord metrica) throws Exception {
-        Map<String, Object> data = new HashMap<>();
-        data.put("tipo",            metrica.tipo());
-        data.put("valorPrimario",   metrica.valorPrimario());
-        data.put("valorSecundario", metrica.valorSecundario());
-        data.put("fechaRegistro",   metrica.fechaRegistro());
+    public MetricaService(MetricaRepository metricaRepository) {
+        this.metricaRepository = metricaRepository;
+    }
 
-        FirestoreClient.getFirestore()
-                .collection(COLLECTION_USERS)
-                .document(uidPaciente)
-                .collection(COLLECTION_METRICAS)
-                .add(data)
-                .get();
+    public void validarYGuardar(String uid, String tipo, Double v1, Double v2) throws Exception {
+        boolean alerta = false;
+        String recomendacion = null;
+
+        if ("PRESION_ARTERIAL".equals(tipo)) {
+            if (v1 > 135 || v2 > 85) {
+                alerta = true;
+                recomendacion = "Presión elevada. Reducir consumo de sal y monitorear.";
+            }
+        }
+
+        MetricaRecord metrica = new MetricaRecord(
+                null,
+                tipo,
+                v1,
+                v2,
+                nowIso(),
+                alerta,
+                recomendacion
+        );
+
+        metricaRepository.save(uid, metrica);
+    }
+
+    public List<MetricaRecord> obtenerMetricasPorUid(String uid) throws Exception {
+        return metricaRepository.findAllByUid(uid);
     }
 
     public ListenerRegistration escucharMetricasPaciente(
@@ -38,32 +50,15 @@ public class MetricaService {
             Consumer<List<MetricaRecord>> onUpdate,
             Consumer<Exception> onError) {
 
-        return FirestoreClient.getFirestore()
-                .collection(COLLECTION_USERS)
-                .document(uidPaciente)
-                .collection(COLLECTION_METRICAS)
-                .addSnapshotListener((snapshots, error) -> {
-                    if (error != null) {
-                        onError.accept(error);
-                        return;
-                    }
-
-                    if (snapshots == null) return;
-
-                    List<MetricaRecord> metricas = new ArrayList<>();
-                    for (QueryDocumentSnapshot doc : snapshots.getDocuments()) {
-                        metricas.add(new MetricaRecord(
-                                doc.getId(),
-                                doc.getString("tipo"),
-                                doc.getDouble("valorPrimario"),
-                                doc.getDouble("valorSecundario"),
-                                doc.getString("fechaRegistro")
-                        ));
-                    }
-
-                    onUpdate.accept(metricas);
-                });
+        return metricaRepository.listenByUid(uidPaciente, metricas -> {
+            try {
+                onUpdate.accept(metricas);
+            } catch (Exception e) {
+                onError.accept(e);
+            }
+        });
     }
+
 
     public static String nowIso() {
         return LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);

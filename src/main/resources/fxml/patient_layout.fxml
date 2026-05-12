@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.itc.healthtrack.controller.PatientLayoutController"
+    prefWidth="1200"
+    prefHeight="720"
+    stylesheets="@../css/patient_layout.css">
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!--  SIDEBAR IZQUIERDO                                  -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <left>
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="230" spacing="4">
+
+            <!-- Logo / Nombre del sistema -->
+            <VBox styleClass="sidebar-header" spacing="4">
+                <Label text="HealthTrack" styleClass="app-logo" />
+                <Label text="Sistema Médico" styleClass="app-subtitle" />
+            </VBox>
+
+            <Separator styleClass="sidebar-divider" />
+
+            <!-- Info del paciente activo -->
+            <VBox styleClass="patient-info-card" spacing="2">
+                <Label fx:id="labelPatientName" text="Cargando..." styleClass="patient-name" />
+                <Label fx:id="labelPatientId"   text="ID: ---"    styleClass="patient-id"   />
+            </VBox>
+
+            <Separator styleClass="sidebar-divider" />
+
+            <!-- ─── Sección: Módulos ─── -->
+            <Label text="MÓDULOS" styleClass="sidebar-section-label" />
+            <VBox.margin><Insets left="12" /></VBox.margin>
+
+            <Button fx:id="btnSummary"
+                    text="📊  Resumen General"
+                    styleClass="nav-btn, nav-btn-active"
+                    maxWidth="Infinity"
+                    onAction="#handleSummary" />
+
+            <Button fx:id="btnBloodPressure"
+                    text="🩺  Presión Arterial"
+                    styleClass="nav-btn"
+                    maxWidth="Infinity"
+                    onAction="#handleBloodPressure" />
+
+            <Button fx:id="btnGlucose"
+                    text="🩸  Glucosa"
+                    styleClass="nav-btn"
+                    maxWidth="Infinity"
+                    onAction="#handleGlucose" />
+
+            <!-- Spacer — empuja el botón de logout al fondo -->
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Separator styleClass="sidebar-divider" />
+
+            <Button fx:id="btnLogout"
+                    text="⬅  Cerrar Sesión"
+                    styleClass="nav-btn, nav-btn-danger"
+                    maxWidth="Infinity"
+                    onAction="#handleLogout" />
+
+            <VBox.margin><Insets bottom="16" /></VBox.margin>
+
+        </VBox>
+    </left>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!--  ÁREA CENTRAL — aquí se inyectan los sub-módulos   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <center>
+        <AnchorPane fx:id="contentArea" styleClass="content-area" />
+    </center>
+
+</BorderPane>

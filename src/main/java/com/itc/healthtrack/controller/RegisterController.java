@@ -2,6 +2,7 @@ package com.itc.healthtrack.controller;
 
 import com.itc.healthtrack.model.Role;
 import com.itc.healthtrack.service.AuthService;
+import com.itc.healthtrack.util.ViewManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -56,7 +57,8 @@ public class RegisterController {
                 Platform.runLater(() -> {
                     showAlert(Alert.AlertType.INFORMATION, "Registro exitoso",
                             "Usuario creado correctamente. Ya puedes iniciar sesión.");
-                    btnRegister.setDisable(false);
+                    // Redirigir a la pantalla de login después del registro exitoso
+                    ViewManager.switchScene("fxml/login.fxml", "HealthTrack - Login", btnRegister);
                 });
             } catch (Exception e) {
                 Platform.runLater(() -> {
