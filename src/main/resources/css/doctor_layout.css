@@ -1,0 +1,265 @@
+/* ══════════════════════════════════════════════════════════════
+   doctor_layout.css  —  HealthTrack: Estación de Telemedicina
+   ══════════════════════════════════════════════════════════════
+   Tema clínico con tonos teal (#0D9488) y azul médico.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Root ────────────────────────────────────────────────────── */
+.root {
+    -fx-background-color: #F0FDFA;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/*  SIDEBAR                                                      */
+/* ══════════════════════════════════════════════════════════════ */
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom, #042F2E, #0F172A);
+    -fx-padding: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 16, 0, 5, 0);
+}
+
+/* ── Header del sidebar ─────────────────────────────────────── */
+.sidebar-header {
+    -fx-padding: 24 20 16 20;
+    -fx-background-color: rgba(0, 0, 0, 0.25);
+}
+
+.app-logo {
+    -fx-text-fill: #CCFBF1;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+
+.app-subtitle {
+    -fx-text-fill: #5EEAD4;
+    -fx-font-size: 11px;
+    -fx-font-style: italic;
+    -fx-opacity: 0.85;
+}
+
+/* ── Separadores ────────────────────────────────────────────── */
+.sidebar-divider {
+    -fx-background-color: rgba(94, 234, 212, 0.15);
+    -fx-padding: 0;
+}
+
+/* ── Tarjeta del doctor ─────────────────────────────────────── */
+.doctor-info-card {
+    -fx-padding: 14 18 14 18;
+    -fx-background-color: rgba(13, 148, 136, 0.15);
+    -fx-background-radius: 10;
+    -fx-margin: 10 12 10 12;
+}
+
+.doctor-name {
+    -fx-text-fill: #F0FDFA;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.doctor-id {
+    -fx-text-fill: #5EEAD4;
+    -fx-font-size: 11px;
+    -fx-opacity: 0.8;
+}
+
+.status-badge {
+    -fx-text-fill: #34D399;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-padding: 3 8 3 8;
+    -fx-background-color: rgba(52, 211, 153, 0.15);
+    -fx-background-radius: 20;
+}
+
+/* ── Sección de pacientes ───────────────────────────────────── */
+.patients-header {
+    -fx-padding: 12 16 6 16;
+}
+
+.sidebar-section-label {
+    -fx-text-fill: #5EEAD4;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+.patient-count-badge {
+    -fx-text-fill: #99F6E4;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 8 2 8;
+    -fx-background-color: rgba(13, 148, 136, 0.3);
+    -fx-background-radius: 12;
+}
+
+/* ── Barra de búsqueda ──────────────────────────────────────── */
+.search-bar-container {
+    -fx-padding: 4 12 8 12;
+}
+
+.search-field {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #F0FDFA;
+    -fx-prompt-text-fill: #5EEAD4;
+    -fx-font-size: 12px;
+    -fx-padding: 8 12;
+    -fx-background-radius: 8;
+    -fx-border-color: rgba(94, 234, 212, 0.2);
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+}
+
+.search-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-border-color: #0D9488;
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.35), 8, 0, 0, 0);
+}
+
+/* ── Lista de pacientes (scroll) ────────────────────────────── */
+.patient-list-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.patient-list-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.patient-list-scroll .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.patient-list-scroll .scroll-bar .thumb {
+    -fx-background-color: rgba(94, 234, 212, 0.25);
+    -fx-background-radius: 4;
+}
+
+.patient-list-scroll .scroll-bar .thumb:hover {
+    -fx-background-color: rgba(94, 234, 212, 0.4);
+}
+
+.patient-list-scroll .scroll-bar .increment-button,
+.patient-list-scroll .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.patient-list-scroll .scroll-bar .increment-arrow,
+.patient-list-scroll .scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+.patient-list-container {
+    -fx-padding: 4 10 8 10;
+    -fx-background-color: transparent;
+}
+
+/* ── Tarjeta individual de paciente ─────────────────────────── */
+.patient-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(94, 234, 212, 0.1);
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+}
+
+.patient-card:hover {
+    -fx-background-color: rgba(13, 148, 136, 0.2);
+    -fx-border-color: rgba(13, 148, 136, 0.4);
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.2), 6, 0, 0, 2);
+}
+
+.patient-card-selected {
+    -fx-background-color: rgba(13, 148, 136, 0.35);
+    -fx-border-color: #0D9488;
+    -fx-border-width: 1.5;
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.3), 8, 0, 0, 2);
+}
+
+.patient-card-name {
+    -fx-text-fill: #CCFBF1;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.patient-card-email {
+    -fx-text-fill: #5EEAD4;
+    -fx-font-size: 11px;
+    -fx-opacity: 0.7;
+    -fx-padding: 0 0 0 18;
+}
+
+.patient-card-status-dot {
+    -fx-text-fill: #34D399;
+    -fx-font-size: 8px;
+}
+
+.empty-patient-label {
+    -fx-text-fill: #5EEAD4;
+    -fx-font-size: 12px;
+    -fx-opacity: 0.6;
+    -fx-padding: 20 0;
+    -fx-alignment: CENTER;
+}
+
+/* ── Botones de navegación ──────────────────────────────────── */
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 16;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+}
+
+.nav-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-text-fill: #E2E8F0;
+}
+
+.nav-btn-danger {
+    -fx-text-fill: #F87171;
+}
+
+.nav-btn-danger:hover {
+    -fx-background-color: rgba(239, 68, 68, 0.12);
+    -fx-text-fill: #FCA5A5;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/*  ÁREA CENTRAL                                                 */
+/* ══════════════════════════════════════════════════════════════ */
+.content-area {
+    -fx-background-color: #F0FDFA;
+}
+
+/* ── Empty State ────────────────────────────────────────────── */
+.empty-state {
+    -fx-padding: 60;
+}
+
+.empty-icon {
+    -fx-font-size: 64px;
+    -fx-opacity: 0.6;
+}
+
+.empty-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+.empty-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748B;
+    -fx-max-width: 420;
+    -fx-wrap-text: true;
+    -fx-text-alignment: CENTER;
+    -fx-alignment: CENTER;
+}

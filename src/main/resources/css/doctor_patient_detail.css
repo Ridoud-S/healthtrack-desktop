@@ -1,0 +1,400 @@
+/* ══════════════════════════════════════════════════════════════
+   doctor_patient_detail.css — Centro de Mando del Paciente
+   ══════════════════════════════════════════════════════════════
+   Tema clínico con tonos teal (#0D9488) y azul médico.
+   Charts modernos sin fondo gris por defecto de JavaFX.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Root del módulo ─────────────────────────────────────────── */
+.detail-scroll-root {
+    -fx-background-color: #F0FDFA;
+    -fx-background: #F0FDFA;
+    -fx-border-color: transparent;
+}
+
+.detail-scroll-root > .viewport {
+    -fx-background-color: #F0FDFA;
+}
+
+.detail-root {
+    -fx-background-color: #F0FDFA;
+    -fx-padding: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/*  HEADER DEL PACIENTE                                          */
+/* ══════════════════════════════════════════════════════════════ */
+.patient-header {
+    -fx-padding: 20 28 16 28;
+    -fx-background-color: linear-gradient(to right, #CCFBF1, #F0FDFA);
+    -fx-border-color: transparent transparent rgba(13, 148, 136, 0.15) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.header-patient-name {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #042F2E;
+}
+
+.header-patient-uid {
+    -fx-font-size: 11px;
+    -fx-text-fill: #0D9488;
+    -fx-opacity: 0.8;
+}
+
+.header-metric-count {
+    -fx-font-size: 12px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-padding: 5 14;
+    -fx-background-color: #0D9488;
+    -fx-background-radius: 16;
+}
+
+/* ── Separadores de sección ──────────────────────────────────── */
+.section-divider {
+    -fx-background-color: rgba(13, 148, 136, 0.12);
+    -fx-padding: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/*  SECCIÓN TENDENCIAS (CHARTS)                                  */
+/* ══════════════════════════════════════════════════════════════ */
+.section-container {
+    -fx-padding: 16 24 8 24;
+}
+
+.section-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #042F2E;
+}
+
+/* ── TabPane de tendencias ──────────────────────────────────── */
+.trends-tab-pane {
+    -fx-background-color: transparent;
+}
+
+.trends-tab-pane > .tab-header-area {
+    -fx-padding: 0 0 0 4;
+}
+
+.trends-tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.trends-tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: rgba(13, 148, 136, 0.08);
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 8 18;
+    -fx-border-color: transparent;
+}
+
+.trends-tab-pane > .tab-header-area > .headers-region > .tab:hover {
+    -fx-background-color: rgba(13, 148, 136, 0.15);
+}
+
+.trends-tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 4, 0, 0, 1);
+}
+
+.trends-tab-pane > .tab-header-area > .headers-region > .tab .tab-label {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.trends-tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label {
+    -fx-text-fill: #0D9488;
+}
+
+.trends-tab-pane > .tab-content-area {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 0 12 12 12;
+    -fx-border-color: rgba(13, 148, 136, 0.1);
+    -fx-border-radius: 0 12 12 12;
+    -fx-border-width: 1;
+    -fx-padding: 8;
+}
+
+/* ── LineChart styling (sin fondo gris) ─────────────────────── */
+.trend-chart {
+    -fx-background-color: transparent;
+    -fx-min-height: 260;
+    -fx-pref-height: 280;
+}
+
+.trend-chart > .chart-content {
+    -fx-background-color: transparent;
+}
+
+.trend-chart > .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: rgba(13, 148, 136, 0.08);
+    -fx-stroke-width: 1;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: rgba(13, 148, 136, 0.08);
+    -fx-stroke-width: 1;
+}
+
+.chart-alternative-row-fill {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+}
+
+.chart-alternative-column-fill {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+}
+
+/* Colores de las series */
+.default-color0.chart-series-line {
+    -fx-stroke: #0D9488;
+    -fx-stroke-width: 2.5;
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: #0D9488, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 5;
+    -fx-padding: 4;
+}
+
+.default-color1.chart-series-line {
+    -fx-stroke: #F97316;
+    -fx-stroke-width: 2.5;
+}
+
+.default-color1.chart-line-symbol {
+    -fx-background-color: #F97316, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 5;
+    -fx-padding: 4;
+}
+
+/* Leyenda del chart */
+.chart-legend {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 6;
+    -fx-padding: 6 12;
+    -fx-border-color: rgba(13, 148, 136, 0.1);
+    -fx-border-radius: 6;
+}
+
+.chart-legend-item-text {
+    -fx-font-size: 11px;
+    -fx-text-fill: #334155;
+}
+
+/* Ejes */
+.axis-label {
+    -fx-text-fill: #475569;
+    -fx-font-size: 11px;
+}
+
+.axis {
+    -fx-tick-label-fill: #64748B;
+    -fx-tick-label-font-size: 10;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/*  PANEL INFERIOR                                               */
+/* ══════════════════════════════════════════════════════════════ */
+.bottom-panels {
+    -fx-padding: 8 24 24 24;
+    -fx-min-height: 320;
+}
+
+/* ── Tarjeta base para paneles ──────────────────────────────── */
+.panel-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: rgba(13, 148, 136, 0.12);
+    -fx-border-width: 1;
+    -fx-padding: 16 18;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 8, 0, 0, 3);
+}
+
+.panel-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #042F2E;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/*  TABLA DE MÉTRICAS                                            */
+/* ══════════════════════════════════════════════════════════════ */
+.metrics-table {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: rgba(13, 148, 136, 0.08);
+}
+
+.metrics-table .column-header-background {
+    -fx-background-color: #F0FDFA;
+    -fx-border-color: transparent transparent rgba(13, 148, 136, 0.15) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.metrics-table .column-header {
+    -fx-background-color: transparent;
+}
+
+.metrics-table .column-header .label {
+    -fx-text-fill: #0D9488;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 6;
+}
+
+.metrics-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent rgba(13, 148, 136, 0.06) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.metrics-table .table-row-cell:odd {
+    -fx-background-color: rgba(13, 148, 136, 0.03);
+}
+
+.metrics-table .table-row-cell:hover {
+    -fx-background-color: rgba(13, 148, 136, 0.08);
+}
+
+.metrics-table .table-row-cell:selected {
+    -fx-background-color: rgba(13, 148, 136, 0.18);
+}
+
+.metrics-table .table-cell {
+    -fx-text-fill: #1E293B;
+    -fx-font-size: 12px;
+    -fx-padding: 6 8;
+}
+
+.metrics-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: #042F2E;
+}
+
+.metrics-table .placeholder .label {
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 13px;
+}
+
+/* Scrollbar de la tabla */
+.metrics-table .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.metrics-table .scroll-bar .thumb {
+    -fx-background-color: rgba(13, 148, 136, 0.2);
+    -fx-background-radius: 4;
+}
+
+.metrics-table .scroll-bar .thumb:hover {
+    -fx-background-color: rgba(13, 148, 136, 0.35);
+}
+
+.metrics-table .scroll-bar .increment-button,
+.metrics-table .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.metrics-table .scroll-bar .increment-arrow,
+.metrics-table .scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* ── Filler (esquina de los headers de la tabla) ─────────────── */
+.metrics-table .filler {
+    -fx-background-color: #F0FDFA;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/*  PANEL DE PRESCRIPCIÓN                                        */
+/* ══════════════════════════════════════════════════════════════ */
+.prescription-panel {
+    -fx-border-color: rgba(13, 148, 136, 0.2);
+    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #F0FDFA);
+}
+
+.prescription-hint {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64748B;
+}
+
+.prescription-textarea {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8;
+    -fx-border-color: rgba(13, 148, 136, 0.2);
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-font-size: 13px;
+    -fx-text-fill: #1E293B;
+    -fx-prompt-text-fill: #94A3B8;
+    -fx-min-height: 120;
+}
+
+.prescription-textarea:focused {
+    -fx-border-color: #0D9488;
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.2), 8, 0, 0, 0);
+}
+
+/* Scrollbar del TextArea */
+.prescription-textarea .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/* ── Botón de enviar ─────────────────────────────────────────── */
+.btn-send {
+    -fx-background-color: linear-gradient(to right, #0D9488, #0F766E);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 24;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.35), 6, 0, 0, 2);
+}
+
+.btn-send:hover {
+    -fx-background-color: linear-gradient(to right, #0F766E, #115E59);
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.5), 10, 0, 0, 3);
+}
+
+.btn-send:pressed {
+    -fx-background-color: #115E59;
+    -fx-effect: dropshadow(gaussian, rgba(13, 148, 136, 0.2), 4, 0, 0, 1);
+}
+
+.btn-send:disabled {
+    -fx-background-color: #94A3B8;
+    -fx-opacity: 0.6;
+}
+
+/* ── Feedback label ──────────────────────────────────────────── */
+.feedback-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #64748B;
+}
+
+.feedback-success {
+    -fx-text-fill: #059669;
+}
+
+.feedback-warning {
+    -fx-text-fill: #D97706;
+}
