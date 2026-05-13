@@ -1,0 +1,349 @@
+/* ══════════════════════════════════════════════════════════════════
+   dashboard_admin.css  —  HealthTrack: Panel de Administración
+   ══════════════════════════════════════════════════════════════════
+   Tema oscuro/sobrio que comunica visualmente "permisos elevados".
+   Paleta coordinada con patient_layout.css pero con acento índigo
+   para diferenciar el rol ADMIN del resto de la aplicación.
+   ══════════════════════════════════════════════════════════════════
+
+   Paleta principal:
+   ─────────────────
+   bg-deep:        #0B0F19   (fondo profundo)
+   bg-surface:     #111827   (superficie de cards / paneles)
+   bg-elevated:    #1F2937   (elementos elevados)
+   border-subtle:  #374151   (bordes sutiles)
+   accent-indigo:  #6366F1   (acento primario)
+   accent-hover:   #818CF8   (hover del acento)
+   text-primary:   #F1F5F9
+   text-secondary: #94A3B8
+   text-muted:     #64748B
+   success:        #10B981
+   danger:         #EF4444
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Raíz ────────────────────────────────────────────────────── */
+.admin-root {
+    -fx-background-color: #0B0F19;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  HEADER                                                        */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.admin-header {
+    -fx-background-color: #111827;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 0, 4);
+}
+
+.admin-header-icon {
+    -fx-font-size: 28;
+}
+
+.admin-header-title {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-text-fill: #F1F5F9;
+}
+
+.admin-header-subtitle {
+    -fx-font-size: 12;
+    -fx-text-fill: #64748B;
+    -fx-font-style: italic;
+}
+
+.admin-divider {
+    -fx-padding: 0;
+    -fx-opacity: 0.15;
+}
+
+/* ── Botón cerrar sesión ────────────────────────────────────── */
+.btn-logout {
+    -fx-background-color: transparent;
+    -fx-text-fill: #F87171;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18;
+    -fx-background-radius: 8;
+    -fx-border-color: #7F1D1D;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.btn-logout:hover {
+    -fx-background-color: #450A0A;
+    -fx-text-fill: #FCA5A5;
+    -fx-border-color: #991B1B;
+}
+
+.btn-logout:pressed {
+    -fx-background-color: #7F1D1D;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  CONTENIDO PRINCIPAL                                           */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.admin-content {
+    -fx-background-color: #0B0F19;
+}
+
+.section-label {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: #CBD5E1;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  TABLEVIEW                                                     */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.admin-table {
+    -fx-background-color: #111827;
+    -fx-border-color: #1F2937;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Fondo del viewport interno */
+.admin-table .virtual-flow .clipped-container .sheet .cell {
+    -fx-background-color: transparent;
+}
+
+.admin-table > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: transparent;
+}
+
+/* ── Encabezados de columna ─────────────────────────────────── */
+.admin-table .column-header-background {
+    -fx-background-color: #1F2937;
+}
+
+.admin-table .column-header-background .filler {
+    -fx-background-color: #1F2937;
+}
+
+.admin-table .column-header {
+    -fx-background-color: #1F2937;
+    -fx-border-color: transparent transparent #374151 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.admin-table .column-header .label {
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-padding: 8 12;
+}
+
+/* ── Filas de la tabla ──────────────────────────────────────── */
+.admin-table .table-row-cell {
+    -fx-background-color: #111827;
+    -fx-border-color: transparent transparent #1F2937 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-table-cell-border-color: transparent;
+}
+
+.admin-table .table-row-cell:odd {
+    -fx-background-color: #0F172A;
+}
+
+.admin-table .table-row-cell:hover {
+    -fx-background-color: #1E293B;
+}
+
+.admin-table .table-row-cell:selected {
+    -fx-background-color: #312E81;
+}
+
+.admin-table .table-row-cell:selected:hover {
+    -fx-background-color: #3730A3;
+}
+
+/* ── Celdas ─────────────────────────────────────────────────── */
+.admin-table .table-cell {
+    -fx-text-fill: #E2E8F0;
+    -fx-font-size: 13;
+    -fx-padding: 10 12;
+}
+
+.admin-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: #FFFFFF;
+}
+
+/* ── Placeholder (tabla vacía) ──────────────────────────────── */
+.admin-table .placeholder .label {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 13;
+    -fx-font-style: italic;
+}
+
+/* ── ScrollBar dentro de la tabla ───────────────────────────── */
+.admin-table .scroll-bar:vertical .track,
+.admin-table .scroll-bar:horizontal .track {
+    -fx-background-color: #111827;
+}
+
+.admin-table .scroll-bar:vertical .thumb,
+.admin-table .scroll-bar:horizontal .thumb {
+    -fx-background-color: #374151;
+    -fx-background-radius: 4;
+}
+
+.admin-table .scroll-bar:vertical .thumb:hover,
+.admin-table .scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: #4B5563;
+}
+
+.admin-table .scroll-bar .increment-button,
+.admin-table .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.admin-table .scroll-bar .increment-arrow,
+.admin-table .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  PANEL DE ASIGNACIÓN (Bottom)                                  */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.assignment-panel {
+    -fx-background-color: #111827;
+    -fx-border-color: #1F2937 transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, -3);
+}
+
+.assignment-title {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-text-fill: #A5B4FC;
+}
+
+.assignment-label {
+    -fx-font-size: 13;
+    -fx-text-fill: #94A3B8;
+    -fx-font-weight: bold;
+}
+
+/* ── ComboBox ───────────────────────────────────────────────── */
+.admin-combo {
+    -fx-background-color: #1F2937;
+    -fx-border-color: #374151;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+    -fx-cursor: hand;
+}
+
+.admin-combo .list-cell {
+    -fx-text-fill: #E2E8F0;
+    -fx-font-size: 13;
+    -fx-background-color: transparent;
+}
+
+.admin-combo .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.admin-combo .arrow {
+    -fx-background-color: #94A3B8;
+}
+
+.admin-combo:hover {
+    -fx-border-color: #6366F1;
+}
+
+.admin-combo:focused {
+    -fx-border-color: #818CF8;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.25), 8, 0, 0, 0);
+}
+
+/* Popup del ComboBox */
+.admin-combo .combo-box-popup .list-view {
+    -fx-background-color: #1F2937;
+    -fx-border-color: #374151;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 0, 4);
+}
+
+.admin-combo .combo-box-popup .list-view .list-cell {
+    -fx-text-fill: #E2E8F0;
+    -fx-font-size: 13;
+    -fx-padding: 8 14;
+    -fx-background-color: #1F2937;
+}
+
+.admin-combo .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #312E81;
+    -fx-text-fill: #FFFFFF;
+}
+
+.admin-combo .combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: #4338CA;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* ── Botón Asignar ──────────────────────────────────────────── */
+.btn-asignar {
+    -fx-background-color: #6366F1;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-padding: 9 24;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.35), 8, 0, 0, 2);
+}
+
+.btn-asignar:hover {
+    -fx-background-color: #818CF8;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.5), 12, 0, 0, 3);
+}
+
+.btn-asignar:pressed {
+    -fx-background-color: #4338CA;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.2), 4, 0, 0, 1);
+}
+
+.btn-asignar:disabled {
+    -fx-background-color: #374151;
+    -fx-text-fill: #64748B;
+    -fx-effect: none;
+    -fx-opacity: 0.7;
+}
+
+/* ── Barra de estado ────────────────────────────────────────── */
+.status-divider {
+    -fx-padding: 6 0 2 0;
+    -fx-opacity: 0.1;
+}
+
+.status-bar {
+    -fx-font-size: 12;
+    -fx-text-fill: #64748B;
+    -fx-font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  TOOLTIPS                                                      */
+/* ═══════════════════════════════════════════════════════════════ */
+.tooltip {
+    -fx-background-color: #1F2937;
+    -fx-text-fill: #E2E8F0;
+    -fx-font-size: 12;
+    -fx-background-radius: 6;
+    -fx-border-color: #374151;
+    -fx-border-radius: 6;
+    -fx-padding: 6 10;
+}

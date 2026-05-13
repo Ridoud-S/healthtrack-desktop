@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.itc.healthtrack.controller.AdminDashboardController"
+            prefWidth="1100" prefHeight="720"
+            styleClass="admin-root"
+            stylesheets="@../css/dashboard_admin.css">
+
+    <!-- ═══════════════════════════════════════════════════════════
+         HEADER (Top)
+         ═══════════════════════════════════════════════════════════ -->
+    <top>
+        <VBox styleClass="admin-header">
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <padding><Insets top="20" right="28" bottom="12" left="28"/></padding>
+
+                <!-- Ícono + Título -->
+                <Label text="🛡" styleClass="admin-header-icon"/>
+                <VBox spacing="2">
+                    <Label fx:id="lblWelcome" text="Panel de Administración"
+                           styleClass="admin-header-title"/>
+                    <Label text="Gestión de usuarios y asignación de médicos"
+                           styleClass="admin-header-subtitle"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="btnLogout" text="✕  Cerrar sesión"
+                        styleClass="btn-logout"
+                        onAction="#onLogoutPressed"/>
+            </HBox>
+
+            <Separator styleClass="admin-divider"/>
+        </VBox>
+    </top>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         CONTENIDO PRINCIPAL (Center) — Tabla de pacientes
+         ═══════════════════════════════════════════════════════════ -->
+    <center>
+        <VBox spacing="12" styleClass="admin-content">
+            <padding><Insets top="20" right="28" bottom="10" left="28"/></padding>
+
+            <Label text="📋  Pacientes registrados" styleClass="section-label"/>
+
+            <TableView fx:id="tablaPacientes" VBox.vgrow="ALWAYS"
+                       styleClass="admin-table">
+                <columns>
+                    <TableColumn fx:id="colNombre"
+                                 text="Nombre" prefWidth="250" minWidth="160"/>
+                    <TableColumn fx:id="colEmail"
+                                 text="Email" prefWidth="280" minWidth="200"/>
+                    <TableColumn fx:id="colMedicoAsignado"
+                                 text="Médico Asignado" prefWidth="250" minWidth="160"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL DE ASIGNACIÓN (Bottom)
+         ═══════════════════════════════════════════════════════════ -->
+    <bottom>
+        <VBox styleClass="assignment-panel">
+            <padding><Insets top="16" right="28" bottom="16" left="28"/></padding>
+
+            <HBox spacing="16" alignment="CENTER_LEFT">
+                <Label text="⚕  Asignar Médico" styleClass="assignment-title"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label text="Doctor:" styleClass="assignment-label"/>
+                <ComboBox fx:id="cbDoctores" prefWidth="320"
+                          styleClass="admin-combo"/>
+
+                <Button fx:id="btnAsignar" text="Asignar Médico"
+                        styleClass="btn-asignar"
+                        onAction="#onAsignarPressed"/>
+            </HBox>
+
+            <Separator styleClass="status-divider"/>
+
+            <Label fx:id="lblStatusBar" text="Listo."
+                   styleClass="status-bar"/>
+        </VBox>
+    </bottom>
+
+</BorderPane>
