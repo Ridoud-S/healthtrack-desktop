@@ -1,0 +1,209 @@
+/* ════════════════════════════════════════════════════════════════
+   patient_inbox.css — HealthTrack: Buzón del Paciente
+   ════════════════════════════════════════════════════════════════
+   Master-detail inbox con estética empresarial.
+   Paleta coordinada con patient_layout.css (sidebar oscuro).
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Raíz del módulo ──────────────────────────────────────────── */
+.inbox-root {
+    -fx-background-color: #F1F5F9;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.inbox-header {
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.04), 4, 0, 0, 2);
+}
+
+.inbox-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.inbox-subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64748B;
+}
+
+.inbox-count-badge {
+    -fx-text-fill: #3B82F6;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 10 2 10;
+    -fx-background-color: #EFF6FF;
+    -fx-background-radius: 12;
+}
+
+.inbox-divider {
+    -fx-padding: 0;
+    -fx-opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  MASTER-DETAIL BODY                                            */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.inbox-body {
+    -fx-background-color: #F1F5F9;
+}
+
+/* ── Panel izquierdo: Lista de notas ──────────────────────────── */
+.inbox-list-panel {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: transparent #E2E8F0 transparent transparent;
+    -fx-border-width: 0 1 0 0;
+}
+
+.inbox-list-section-label {
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+
+/* ── ListView ─────────────────────────────────────────────────── */
+.inbox-list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}
+
+.inbox-list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 12 16 12 16;
+    -fx-border-color: transparent transparent #F1F5F9 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.inbox-list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:hover {
+    -fx-background-color: #F8FAFC;
+}
+
+.inbox-list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected {
+    -fx-background-color: #EFF6FF;
+    -fx-border-color: transparent transparent transparent #3B82F6;
+    -fx-border-width: 0 0 0 3;
+}
+
+.inbox-list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:selected:focused {
+    -fx-background-color: #EFF6FF;
+}
+
+/* Fix para el "focus ring" por defecto de JavaFX */
+.inbox-list-view:focused {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+/* ScrollBar styling */
+.inbox-list-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.inbox-list-view .scroll-bar .thumb {
+    -fx-background-color: #CBD5E1;
+    -fx-background-radius: 4;
+}
+
+.inbox-list-view .scroll-bar .thumb:hover {
+    -fx-background-color: #94A3B8;
+}
+
+.inbox-list-view .scroll-bar .increment-button,
+.inbox-list-view .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.inbox-list-view .scroll-bar .increment-arrow,
+.inbox-list-view .scroll-bar .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* ── Cell content ─────────────────────────────────────────────── */
+.nota-cell-box {
+    -fx-padding: 2 0 2 0;
+}
+
+.nota-cell-fecha {
+    -fx-font-size: 10px;
+    -fx-text-fill: #94A3B8;
+    -fx-font-weight: bold;
+}
+
+.nota-cell-doctor {
+    -fx-font-size: 13px;
+    -fx-text-fill: #0F172A;
+    -fx-font-weight: bold;
+}
+
+.nota-cell-extracto {
+    -fx-font-size: 11px;
+    -fx-text-fill: #64748B;
+}
+
+/* ── Empty state ──────────────────────────────────────────────── */
+.inbox-empty-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #94A3B8;
+    -fx-padding: 32 16;
+    -fx-alignment: CENTER;
+    -fx-font-style: italic;
+}
+
+/* ── Separador vertical ──────────────────────────────────────── */
+.inbox-vertical-divider {
+    -fx-opacity: 0.3;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/*  PANEL DE DETALLE (derecha)                                    */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.inbox-detail-panel {
+    -fx-background-color: #FFFFFF;
+}
+
+.inbox-detail-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1E293B;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ── TextArea de contenido ────────────────────────────────────── */
+.inbox-detail-content {
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 10;
+    -fx-border-color: #E2E8F0;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 14px;
+    -fx-text-fill: #1E293B;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-padding: 16;
+}
+
+.inbox-detail-content .content {
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 10;
+}
+
+.inbox-detail-content:focused {
+    -fx-border-color: #CBD5E1;
+    -fx-effect: none;
+}
+
+.inbox-detail-content .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/* Prompt text */
+.inbox-detail-content .text {
+    -fx-font-size: 14px;
+}

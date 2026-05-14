@@ -1,19 +1,9 @@
 /* ══════════════════════════════════════════════════════════════
    patient_layout.css  —  HealthTrack Shell & Sidebar
+   ══════════════════════════════════════════════════════════════
+   Estética minimalista y empresarial — Zero Emojis.
+   Paleta oscura con gradiente sutil azul marino profundo.
    ══════════════════════════════════════════════════════════════ */
-
-/* ── Variables de diseño ─────────────────────────────────── */
-/* JavaFX no soporta custom properties CSS nativas,
-   pero mantenemos los valores centralizados aquí arriba. */
-
-/* Paleta */
-/* sidebar-bg:      #0F172A  (azul marino oscuro)  */
-/* sidebar-hover:   #1E293B                         */
-/* active-accent:   #3B82F6  (azul claro)           */
-/* danger-red:      #EF4444                         */
-/* text-primary:    #F1F5F9                         */
-/* text-muted:      #94A3B8                         */
-/* content-bg:      #F8FAFC                         */
 
 /* ── Root / BorderPane ───────────────────────────────────── */
 .root {
@@ -21,104 +11,110 @@
     -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* ── Sidebar ─────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════ */
+/*  SIDEBAR                                                      */
+/* ══════════════════════════════════════════════════════════════ */
 .sidebar {
-    -fx-background-color: #0F172A;
-    -fx-padding: 0 0 8 0;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 12, 0, 4, 0);
+    -fx-background-color: linear-gradient(to bottom, #0B1120, #0F172A, #131D35);
+    -fx-padding: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 16, 0, 5, 0);
 }
 
+/* ── Header del sidebar ──────────────────────────────────────── */
 .sidebar-header {
-    -fx-padding: 24 20 16 20;
-    -fx-background-color: #0B1120;
+    -fx-padding: 28 20 20 20;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
 }
 
 .app-logo {
     -fx-text-fill: #F1F5F9;
-    -fx-font-size: 20px;
+    -fx-font-size: 21px;
     -fx-font-weight: bold;
 }
 
 .app-subtitle {
-    -fx-text-fill: #64748B;
+    -fx-text-fill: #60A5FA;
     -fx-font-size: 11px;
     -fx-font-style: italic;
+    -fx-opacity: 0.85;
 }
 
+/* ── Separadores ─────────────────────────────────────────────── */
 .sidebar-divider {
-    -fx-background-color: #1E293B;
-    -fx-padding: 0 0 0 0;
-    -fx-opacity: 0.6;
+    -fx-background-color: rgba(96, 165, 250, 0.12);
+    -fx-padding: 0;
 }
 
+/* ── Sección label ───────────────────────────────────────────── */
 .sidebar-section-label {
-    -fx-text-fill: #475569;
+    -fx-text-fill: #60A5FA;
     -fx-font-size: 10px;
     -fx-font-weight: bold;
-    -fx-padding: 12 0 4 16;
-    -fx-letter-spacing: 1.5px;
+    -fx-opacity: 0.7;
 }
 
-/* ── Tarjeta de info del paciente ────────────────────────── */
+/* ── Tarjeta de info del paciente ────────────────────────────── */
 .patient-info-card {
-    -fx-padding: 12 16 12 16;
-    -fx-background-color: #1E293B;
-    -fx-background-radius: 8;
-    -fx-margin: 8 12 8 12;
+    -fx-padding: 14 18 14 18;
+    -fx-background-color: rgba(59, 130, 246, 0.1);
+    -fx-background-radius: 10;
 }
 
 .patient-name {
     -fx-text-fill: #E2E8F0;
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
     -fx-font-weight: bold;
 }
 
 .patient-id {
-    -fx-text-fill: #64748B;
+    -fx-text-fill: #60A5FA;
     -fx-font-size: 11px;
+    -fx-opacity: 0.7;
 }
 
-/* ── Botones de navegación ───────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════ */
+/*  BOTONES DE NAVEGACIÓN                                        */
+/* ══════════════════════════════════════════════════════════════ */
 .nav-btn {
     -fx-background-color: transparent;
     -fx-text-fill: #94A3B8;
     -fx-font-size: 13px;
+    -fx-font-weight: normal;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 10 16 10 16;
-    -fx-background-radius: 6;
+    -fx-padding: 11 18 11 18;
+    -fx-background-radius: 8;
     -fx-cursor: hand;
     -fx-border-color: transparent;
-    -fx-margin: 2 8 2 8;
 }
 
 .nav-btn:hover {
-    -fx-background-color: #1E293B;
+    -fx-background-color: rgba(255, 255, 255, 0.06);
     -fx-text-fill: #E2E8F0;
 }
 
 /* Estado activo del botón seleccionado */
 .nav-btn-active {
-    -fx-background-color: #1D4ED8;
+    -fx-background-color: linear-gradient(to right, #1D4ED8, #2563EB);
     -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.35), 8, 0, 0, 2);
 }
 
 .nav-btn-active:hover {
-    -fx-background-color: #2563EB;
+    -fx-background-color: linear-gradient(to right, #2563EB, #3B82F6);
 }
 
 /* Botón de cerrar sesión */
 .nav-btn-danger {
     -fx-text-fill: #F87171;
-    -fx-margin: 8 8 8 8;
 }
 
 .nav-btn-danger:hover {
-    -fx-background-color: #450A0A;
+    -fx-background-color: rgba(239, 68, 68, 0.1);
     -fx-text-fill: #FCA5A5;
 }
 
-/* ── Área central de contenido ───────────────────────────── */
+/* ── Área central de contenido ───────────────────────────────── */
 .content-area {
     -fx-background-color: #F1F5F9;
 }
