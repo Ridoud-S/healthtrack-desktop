@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<!--
+    Sub-módulo: Buzón del Paciente (Inbox)
+    ────────────────────────────────────────────────────────────────
+    - Master-Detail: ListView (izquierda) + TextArea (derecha)
+    - Muestra notas médicas enviadas por los doctores
+    - Se inyecta en el contentArea del Shell (patient_layout.fxml)
+    ────────────────────────────────────────────────────────────────
+-->
+<AnchorPane
+    xmlns="http://javafx.com/javafx/17"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="com.itc.healthtrack.controller.PatientInboxController"
+    stylesheets="@../css/patient_inbox.css">
+
+    <VBox
+        AnchorPane.topAnchor="0"
+        AnchorPane.bottomAnchor="0"
+        AnchorPane.leftAnchor="0"
+        AnchorPane.rightAnchor="0"
+        spacing="0"
+        styleClass="inbox-root">
+
+        <!-- ── Header ── -->
+        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="inbox-header">
+            <padding><Insets top="28" right="32" bottom="20" left="32"/></padding>
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                <Label text="Mensajes del Medico" styleClass="inbox-title" />
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label text="Notas medicas y recetas recibidas" styleClass="inbox-subtitle" />
+                    <Label fx:id="lblTotalNotas" text="(0)" styleClass="inbox-count-badge" />
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <Separator styleClass="inbox-divider" />
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  MASTER-DETAIL                                      -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <HBox VBox.vgrow="ALWAYS" spacing="0" styleClass="inbox-body">
+
+            <!-- ── Panel Izquierdo: Lista de notas ── -->
+            <VBox prefWidth="320" minWidth="280" maxWidth="360"
+                  styleClass="inbox-list-panel" spacing="0">
+
+                <Label text="BANDEJA DE ENTRADA" styleClass="inbox-list-section-label">
+                    <VBox.margin><Insets top="16" right="16" bottom="8" left="16"/></VBox.margin>
+                </Label>
+
+                <ListView fx:id="listNotas" styleClass="inbox-list-view"
+                          VBox.vgrow="ALWAYS" />
+
+                <Label fx:id="lblEmpty"
+                       text="No tienes mensajes aun"
+                       styleClass="inbox-empty-label"
+                       visible="true" managed="true" />
+            </VBox>
+
+            <!-- Separador vertical visual -->
+            <Separator orientation="VERTICAL" styleClass="inbox-vertical-divider" />
+
+            <!-- ── Panel Derecho: Contenido de la nota ── -->
+            <VBox fx:id="detailPane" styleClass="inbox-detail-panel"
+                  HBox.hgrow="ALWAYS" spacing="0">
+
+                <Label fx:id="lblNotaHeader"
+                       text="Selecciona un mensaje"
+                       styleClass="inbox-detail-header">
+                    <VBox.margin><Insets top="20" right="24" bottom="16" left="24"/></VBox.margin>
+                </Label>
+
+                <Separator styleClass="inbox-divider" />
+
+                <TextArea fx:id="txtContenido"
+                          styleClass="inbox-detail-content"
+                          VBox.vgrow="ALWAYS"
+                          editable="false"
+                          wrapText="true"
+                          promptText="Elige una nota de la lista para ver su contenido.">
+                    <VBox.margin><Insets top="16" right="24" bottom="24" left="24"/></VBox.margin>
+                </TextArea>
+            </VBox>
+        </HBox>
+    </VBox>
+</AnchorPane>

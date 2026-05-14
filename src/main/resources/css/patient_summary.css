@@ -1,8 +1,9 @@
 /* ════════════════════════════════════════════════════════════════
    patient_summary.css — HealthTrack: Dashboard de Resumen
    ════════════════════════════════════════════════════════════════
-   Estilos para las Metric Cards, Panel de Alertas y header.
-   Paleta coordinada con patient_layout.css (sidebar).
+   Metric Cards con estética minimalista profesional.
+   Tipografía fuerte, bordes redondeados, sombras suaves,
+   colores de estado con línea lateral (zero emojis).
    ════════════════════════════════════════════════════════════════ */
 
 /* ── Raíz del módulo ──────────────────────────────────────────── */
@@ -15,24 +16,21 @@
     -fx-padding: 8 0 0 0;
 }
 
-.summary-icon {
-    -fx-font-size: 28;
-}
-
 .summary-title {
-    -fx-font-size: 20;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
     -fx-text-fill: #0F172A;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 .summary-subtitle {
-    -fx-font-size: 12;
+    -fx-font-size: 13px;
     -fx-text-fill: #64748B;
 }
 
 .summary-divider {
     -fx-padding: 4 0;
-    -fx-opacity: 0.4;
+    -fx-opacity: 0.3;
 }
 
 /* ═══════════════════════════════════════════════════════════════ */
@@ -50,34 +48,34 @@
     -fx-border-radius: 12;
     -fx-border-color: #E2E8F0;
     -fx-border-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 8, 0, 0, 2);
-    -fx-min-height: 155;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 8, 0, 0, 3);
+    -fx-min-height: 140;
     -fx-cursor: hand;
 }
 
 .metric-card:hover {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 14, 0, 0, 4);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 14, 0, 0, 4);
 }
 
-/* ── Acento de color por tipo de métrica (borde superior) ────── */
+/* ── Acento de color por tipo de métrica (borde lateral izquierdo) ── */
 .metric-card-pa {
-    -fx-border-color: #3B82F6 #E2E8F0 #E2E8F0 #E2E8F0;
-    -fx-border-width: 3 1 1 1;
+    -fx-border-color: #3B82F6 #E2E8F0 #E2E8F0 #3B82F6;
+    -fx-border-width: 1 1 1 4;
 }
 
 .metric-card-glucosa {
-    -fx-border-color: #F97316 #E2E8F0 #E2E8F0 #E2E8F0;
-    -fx-border-width: 3 1 1 1;
+    -fx-border-color: #F97316 #E2E8F0 #E2E8F0 #F97316;
+    -fx-border-width: 1 1 1 4;
 }
 
 .metric-card-peso {
-    -fx-border-color: #10B981 #E2E8F0 #E2E8F0 #E2E8F0;
-    -fx-border-width: 3 1 1 1;
+    -fx-border-color: #10B981 #E2E8F0 #E2E8F0 #10B981;
+    -fx-border-width: 1 1 1 4;
 }
 
 .metric-card-fc {
-    -fx-border-color: #8B5CF6 #E2E8F0 #E2E8F0 #E2E8F0;
-    -fx-border-width: 3 1 1 1;
+    -fx-border-color: #8B5CF6 #E2E8F0 #E2E8F0 #8B5CF6;
+    -fx-border-width: 1 1 1 4;
 }
 
 /* ── Estado condicional de la card ───────────────────────────── */
@@ -86,30 +84,27 @@
 }
 
 .metric-card-alert {
-    -fx-background-color: #FEF2F2;
-    -fx-border-color: #EF4444;
-    -fx-border-width: 2;
+    -fx-background-color: #FFFBEB;
+    -fx-border-color: #EF4444 #FDE68A #FDE68A #EF4444;
+    -fx-border-width: 1 1 1 4;
 }
 
 /* ── Contenido de las cards ──────────────────────────────────── */
-.card-icon {
-    -fx-font-size: 26;
-}
-
 .card-label {
-    -fx-font-size: 11;
-    -fx-text-fill: #64748B;
+    -fx-font-size: 11px;
+    -fx-text-fill: #94A3B8;
     -fx-font-weight: bold;
 }
 
 .card-value {
-    -fx-font-size: 26;
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
     -fx-text-fill: #0F172A;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 .card-status {
-    -fx-font-size: 11;
+    -fx-font-size: 12px;
     -fx-text-fill: #94A3B8;
     -fx-font-weight: bold;
 }
@@ -128,13 +123,13 @@
 /* ═══════════════════════════════════════════════════════════════ */
 
 .section-title {
-    -fx-font-size: 15;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #0F172A;
 }
 
 .alertas-count {
-    -fx-font-size: 13;
+    -fx-font-size: 13px;
     -fx-text-fill: #94A3B8;
     -fx-font-weight: bold;
 }
@@ -158,35 +153,36 @@
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
-    -fx-border-color: #FECACA;
-    -fx-border-width: 1;
-    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.1), 6, 0, 0, 2);
+    -fx-border-color: #E2E8F0 #E2E8F0 #E2E8F0 #EF4444;
+    -fx-border-width: 1 1 1 4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 6, 0, 0, 2);
 }
 
 .alert-item:hover {
-    -fx-background-color: #FFF5F5;
-    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.2), 10, 0, 0, 3);
+    -fx-background-color: #FEF2F2;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.12), 10, 0, 0, 3);
 }
 
 .alert-item-icon {
-    -fx-font-size: 22;
+    -fx-font-size: 14px;
     -fx-text-fill: #EF4444;
+    -fx-font-weight: bold;
 }
 
 .alert-item-title {
-    -fx-font-size: 12;
+    -fx-font-size: 13px;
     -fx-font-weight: bold;
     -fx-text-fill: #1E293B;
 }
 
 .alert-item-recommendation {
-    -fx-font-size: 11;
+    -fx-font-size: 12px;
     -fx-text-fill: #64748B;
 }
 
 /* ── Sin alertas ─────────────────────────────────────────────── */
 .no-alertas-label {
-    -fx-font-size: 13;
+    -fx-font-size: 13px;
     -fx-text-fill: #10B981;
     -fx-padding: 24 0;
     -fx-alignment: CENTER;

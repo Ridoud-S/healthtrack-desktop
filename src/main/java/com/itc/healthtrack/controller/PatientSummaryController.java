@@ -71,8 +71,8 @@ public class PatientSummaryController implements Initializable, ModuleLimpiable 
         // Saludo contextual según la hora del día
         String nombre = UserSession.getInstance().getLoggedUser().nombre();
         int hora = LocalDateTime.now().getHour();
-        String saludo = hora < 12 ? "Buenos días" : hora < 18 ? "Buenas tardes" : "Buenas noches";
-        lblSaludo.setText(saludo + ", " + nombre + " \uD83D\uDC4B");
+        String saludo = hora < 12 ? "Buenos dias" : hora < 18 ? "Buenas tardes" : "Buenas noches";
+        lblSaludo.setText(saludo + ", " + nombre);
 
         // Un solo listener para TODAS las métricas del paciente
         String uid = UserSession.getInstance().getLoggedUser().uid();
@@ -130,11 +130,11 @@ public class PatientSummaryController implements Initializable, ModuleLimpiable 
             lblStatus.getStyleClass().removeAll("status-normal", "status-alert");
 
             if (m.alerta()) {
-                lblStatus.setText("⚠ Alerta");
+                lblStatus.setText("ALERTA");
                 lblStatus.getStyleClass().add("status-alert");
                 card.getStyleClass().add("metric-card-alert");
             } else {
-                lblStatus.setText("✅ Normal");
+                lblStatus.setText("Normal");
                 lblStatus.getStyleClass().add("status-normal");
                 card.getStyleClass().add("metric-card-normal");
             }
@@ -158,7 +158,7 @@ public class PatientSummaryController implements Initializable, ModuleLimpiable 
         alertasContainer.getChildren().clear();
 
         if (alertas.isEmpty()) {
-            Label sinAlertas = new Label("\uD83C\uDF89 No hay alertas activas. ¡Todo en orden!");
+            Label sinAlertas = new Label("No hay alertas activas. Todo en orden.");
             sinAlertas.getStyleClass().add("no-alertas-label");
             alertasContainer.getChildren().add(sinAlertas);
             return;
@@ -175,18 +175,18 @@ public class PatientSummaryController implements Initializable, ModuleLimpiable 
         item.setAlignment(Pos.CENTER_LEFT);
         item.setPadding(new Insets(12, 16, 12, 16));
 
-        // Icono
-        Label icon = new Label("⚠");
+        // Indicador de alerta (texto plano, sin emojis)
+        Label icon = new Label("!");
         icon.getStyleClass().add("alert-item-icon");
 
         // Contenido
         VBox info = new VBox(4);
 
         String tipoLegible = switch (metrica.tipo()) {
-            case "PRESION_ARTERIAL"    -> "Presión Arterial";
+            case "PRESION_ARTERIAL"    -> "Presion Arterial";
             case "GLUCOSA"             -> "Glucosa";
             case "PESO_IMC"            -> "Peso / IMC";
-            case "FRECUENCIA_CARDIACA" -> "Frecuencia Cardíaca";
+            case "FRECUENCIA_CARDIACA" -> "Frecuencia Cardiaca";
             default                    -> metrica.tipo();
         };
 
@@ -197,8 +197,8 @@ public class PatientSummaryController implements Initializable, ModuleLimpiable 
         Label titulo = new Label(metrica.fechaRegistro() + " — " + tipoLegible + " (" + valorTexto + ")");
         titulo.getStyleClass().add("alert-item-title");
 
-        Label recomendacion = new Label("→ " +
-                (metrica.recomendacion() != null ? metrica.recomendacion() : "Sin recomendación"));
+        Label recomendacion = new Label(
+                (metrica.recomendacion() != null ? metrica.recomendacion() : "Sin recomendacion"));
         recomendacion.getStyleClass().add("alert-item-recommendation");
         recomendacion.setWrapText(true);
 

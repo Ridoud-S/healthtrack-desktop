@@ -24,18 +24,19 @@
     <!--  SIDEBAR IZQUIERDO                                  -->
     <!-- ═══════════════════════════════════════════════════ -->
     <left>
-        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="230" spacing="4">
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="240" spacing="0">
 
             <!-- Logo / Nombre del sistema -->
             <VBox styleClass="sidebar-header" spacing="4">
                 <Label text="HealthTrack" styleClass="app-logo" />
-                <Label text="Sistema Médico" styleClass="app-subtitle" />
+                <Label text="Portal del Paciente" styleClass="app-subtitle" />
             </VBox>
 
             <Separator styleClass="sidebar-divider" />
 
             <!-- Info del paciente activo -->
             <VBox styleClass="patient-info-card" spacing="2">
+                <VBox.margin><Insets top="8" right="12" bottom="8" left="12"/></VBox.margin>
                 <Label fx:id="labelPatientName" text="Cargando..." styleClass="patient-name" />
                 <Label fx:id="labelPatientId"   text="ID: ---"    styleClass="patient-id"   />
             </VBox>
@@ -43,38 +44,66 @@
             <Separator styleClass="sidebar-divider" />
 
             <!-- ─── Sección: Módulos ─── -->
-            <Label text="MÓDULOS" styleClass="sidebar-section-label" />
-            <VBox.margin><Insets left="12" /></VBox.margin>
+            <Label text="MODULOS" styleClass="sidebar-section-label">
+                <VBox.margin><Insets top="12" left="16" bottom="4"/></VBox.margin>
+            </Label>
 
             <Button fx:id="btnSummary"
-                    text="📊  Resumen General"
+                    text="Resumen General"
                     styleClass="nav-btn, nav-btn-active"
                     maxWidth="Infinity"
-                    onAction="#handleSummary" />
+                    onAction="#handleSummary">
+                <VBox.margin><Insets left="8" right="8" top="2" bottom="2"/></VBox.margin>
+            </Button>
 
             <Button fx:id="btnBloodPressure"
-                    text="🩺  Presión Arterial"
+                    text="Presion Arterial"
                     styleClass="nav-btn"
                     maxWidth="Infinity"
-                    onAction="#handleBloodPressure" />
+                    onAction="#handleBloodPressure">
+                <VBox.margin><Insets left="8" right="8" top="2" bottom="2"/></VBox.margin>
+            </Button>
 
             <Button fx:id="btnGlucose"
-                    text="🩸  Glucosa"
+                    text="Glucosa"
                     styleClass="nav-btn"
                     maxWidth="Infinity"
-                    onAction="#handleGlucose" />
+                    onAction="#handleGlucose">
+                <VBox.margin><Insets left="8" right="8" top="2" bottom="2"/></VBox.margin>
+            </Button>
 
             <Button fx:id="btnHeartRate"
-                    text="💓  Frec. Cardíaca"
+                    text="Frecuencia Cardiaca"
                     styleClass="nav-btn"
                     maxWidth="Infinity"
-                    onAction="#handleHeartRate" />
+                    onAction="#handleHeartRate">
+                <VBox.margin><Insets left="8" right="8" top="2" bottom="2"/></VBox.margin>
+            </Button>
 
             <Button fx:id="btnWeightBmi"
-                    text="⚖️  Peso / IMC"
+                    text="Peso / IMC"
                     styleClass="nav-btn"
                     maxWidth="Infinity"
-                    onAction="#handleWeightBmi" />
+                    onAction="#handleWeightBmi">
+                <VBox.margin><Insets left="8" right="8" top="2" bottom="2"/></VBox.margin>
+            </Button>
+
+            <Separator styleClass="sidebar-divider">
+                <VBox.margin><Insets top="10" bottom="4"/></VBox.margin>
+            </Separator>
+
+            <!-- ─── Sección: Comunicación ─── -->
+            <Label text="COMUNICACION" styleClass="sidebar-section-label">
+                <VBox.margin><Insets top="4" left="16" bottom="4"/></VBox.margin>
+            </Label>
+
+            <Button fx:id="btnInbox"
+                    text="Mensajes del Medico"
+                    styleClass="nav-btn"
+                    maxWidth="Infinity"
+                    onAction="#handleInbox">
+                <VBox.margin><Insets left="8" right="8" top="2" bottom="2"/></VBox.margin>
+            </Button>
 
             <!-- Spacer — empuja el botón de logout al fondo -->
             <Region VBox.vgrow="ALWAYS" />
@@ -82,12 +111,12 @@
             <Separator styleClass="sidebar-divider" />
 
             <Button fx:id="btnLogout"
-                    text="⬅  Cerrar Sesión"
+                    text="Cerrar Sesion"
                     styleClass="nav-btn, nav-btn-danger"
                     maxWidth="Infinity"
-                    onAction="#handleLogout" />
-
-            <VBox.margin><Insets bottom="16" /></VBox.margin>
+                    onAction="#handleLogout">
+                <VBox.margin><Insets top="4" bottom="16" left="8" right="8"/></VBox.margin>
+            </Button>
 
         </VBox>
     </left>
